@@ -7,123 +7,96 @@
     unused_assignments,
     unused_mut
 )]
-#![register_tool(c2rust)]
-#![feature(const_raw_ptr_to_usize_cast, register_tool)]
 
-static mut ts_external_scanner_symbol_map: [TSSymbol; 4] = [
-    sym__string_content as libc::c_int as TSSymbol,
-    sym_raw_string_literal as libc::c_int as TSSymbol,
-    sym_float_literal as libc::c_int as TSSymbol,
-    sym_block_comment as libc::c_int as TSSymbol,
-];
+use std::ffi;
 
-static mut ts_external_scanner_states: [[bool; 4]; 6] = [
+use crate::parser_api::*;
+
+/*pub const ts_external_scanner_symbol_map: [TSSymbol; 4] = [
+    sym__string_content,
+    sym_raw_string_literal,
+    sym_float_literal,
+    sym_block_comment,
+];*/
+
+pub const ts_external_scanner_states: [[bool; 4]; 6] = [
     [false; 4],
-    [
-        1 as libc::c_int != 0,
-        1 as libc::c_int != 0,
-        1 as libc::c_int != 0,
-        1 as libc::c_int != 0,
-    ],
-    [
-        false,
-        1 as libc::c_int != 0,
-        1 as libc::c_int != 0,
-        1 as libc::c_int != 0,
-    ],
-    [false, false, false, 1 as libc::c_int != 0],
-    [1 as libc::c_int != 0, false, false, 1 as libc::c_int != 0],
-    [false, false, 1 as libc::c_int != 0, 1 as libc::c_int != 0],
+    [true, true, true, true],
+    [false, true, true, true],
+    [false, false, false, true],
+    [true, false, false, true],
+    [false, false, true, true],
 ];
 
 // Initialized in run_static_initializers
 static mut ts_parse_actions: [TSParseActionEntry; 5597] = [TSParseActionEntry {
     action: TSParseAction {
-        params: C2RustUnnamed_1 {
-            c2rust_unnamed: C2RustUnnamed_3 {
+        params: TSParseActionParams {
+            field_0: TSParseActionParamsState {
                 state: 0,
-                extra_repetition: [0; 1],
-                c2rust_padding: [0; 1],
+                extra: false,
+                repetition: false,
             },
         },
-        type_0: [0; 1],
-        c2rust_padding: [0; 1],
+        type_0: TSParseActionTypeShift,
     },
 }; 5597];
 
-#[no_mangle]
-pub unsafe extern "C" fn tree_sitter_rust() -> *const TSLanguage {
-    static mut language: TSLanguage = unsafe {
-        {
-            let mut init = TSLanguage {
-                version: 11 as libc::c_int as uint32_t,
-                symbol_count: 312 as libc::c_int as uint32_t,
-                alias_count: 4 as libc::c_int as uint32_t,
-                token_count: 138 as libc::c_int as uint32_t,
-                external_token_count: 4 as libc::c_int as uint32_t,
-                symbol_names: ts_symbol_names.as_ptr() as *mut _,
-                symbol_metadata: ts_symbol_metadata.as_ptr(),
-                parse_table: ts_parse_table.as_ptr() as *mut _ as *const libc::c_ushort,
-                parse_actions: ts_parse_actions.as_ptr() as *mut _,
-                lex_modes: ts_lex_modes.as_ptr() as *mut _,
-                alias_sequences: ts_alias_sequences.as_ptr() as *mut _ as *const TSSymbol,
-                max_alias_sequence_length: 10 as libc::c_int as uint16_t,
-                lex_fn: Some(ts_lex as unsafe extern "C" fn(_: *mut TSLexer, _: TSStateId) -> bool),
-                keyword_lex_fn: Some(
-                    ts_lex_keywords as unsafe extern "C" fn(_: *mut TSLexer, _: TSStateId) -> bool,
-                ),
-                keyword_capture_token: sym_identifier as libc::c_int as TSSymbol,
-                external_scanner: {
-                    let mut init = C2RustUnnamed {
-                        states: ts_external_scanner_states.as_ptr() as *mut _ as *const bool,
-                        symbol_map: ts_external_scanner_symbol_map.as_ptr() as *mut _,
-                        create: Some(
-                            tree_sitter_rust_external_scanner_create
-                                as unsafe extern "C" fn() -> *mut libc::c_void,
-                        ),
-                        destroy: Some(
-                            tree_sitter_rust_external_scanner_destroy
-                                as unsafe extern "C" fn(_: *mut libc::c_void) -> (),
-                        ),
-                        scan: Some(
-                            tree_sitter_rust_external_scanner_scan
-                                as unsafe extern "C" fn(
-                                    _: *mut libc::c_void,
-                                    _: *mut TSLexer,
-                                    _: *const bool,
-                                ) -> bool,
-                        ),
-                        serialize: Some(
-                            tree_sitter_rust_external_scanner_serialize
-                                as unsafe extern "C" fn(
-                                    _: *mut libc::c_void,
-                                    _: *mut libc::c_char,
-                                )
-                                    -> libc::c_uint,
-                        ),
-                        deserialize: Some(
-                            tree_sitter_rust_external_scanner_deserialize
-                                as unsafe extern "C" fn(
-                                    _: *mut libc::c_void,
-                                    _: *const libc::c_char,
-                                    _: libc::c_uint,
-                                ) -> (),
-                        ),
-                    };
-                    init
-                },
-                field_count: 28 as libc::c_int as uint32_t,
-                field_map_slices: ts_field_map_slices.as_ptr(),
-                field_map_entries: ts_field_map_entries.as_ptr(),
-                field_names: ts_field_names.as_ptr() as *mut _,
-                large_state_count: 538 as libc::c_int as uint32_t,
-                small_parse_table: ts_small_parse_table.as_ptr() as *mut _ as *const uint16_t,
-                small_parse_table_map: ts_small_parse_table_map.as_ptr() as *mut _
-                    as *const uint32_t,
-                public_symbol_map: ts_symbol_map.as_ptr() as *mut _,
-            };
-            init
-        }
+pub unsafe extern "C" fn tree_sitter_rust() -> TSLanguage {
+    let language = TSLanguage {
+        version: 11,
+        symbol_count: 312,
+        alias_count: 4,
+        token_count: 138,
+        external_token_count: 4,
+        symbol_names: ts_symbol_names.as_ptr() as *mut _,
+        symbol_metadata: ts_symbol_metadata.as_ptr(),
+        parse_table: ts_parse_table.as_ptr() as *mut _ as *const u16,
+        parse_actions: ts_parse_actions.as_ptr() as *mut _,
+        lex_modes: ts_lex_modes.as_ptr() as *mut _,
+        alias_sequences: ts_alias_sequences.as_ptr() as *mut _ as *const TSSymbol,
+        max_alias_sequence_length: 10,
+        lex_fn: Some(ts_lex as unsafe extern "C" fn(_: *mut TSLexer, _: TSStateId) -> bool),
+        keyword_lex_fn: Some(
+            ts_lex_keywords as unsafe extern "C" fn(_: *mut TSLexer, _: TSStateId) -> bool,
+        ),
+        keyword_capture_token: sym_identifier,
+        external_scanner: TSLanguageExternalScanner {
+            states: ts_external_scanner_states.as_ptr() as *mut _ as *const bool,
+            symbol_map: ts_external_scanner_symbol_map.as_ptr() as *mut _,
+            create: Some(
+                tree_sitter_rust_external_scanner_create
+                    as unsafe extern "C" fn() -> *mut ffi::c_void,
+            ),
+            destroy: Some(
+                tree_sitter_rust_external_scanner_destroy
+                    as unsafe extern "C" fn(_: *mut ffi::c_void) -> (),
+            ),
+            scan: Some(
+                tree_sitter_rust_external_scanner_scan
+                    as unsafe extern "C" fn(
+                        _: *mut ffi::c_void,
+                        _: *mut TSLexer,
+                        _: *const bool,
+                    ) -> bool,
+            ),
+            serialize: Some(
+                tree_sitter_rust_external_scanner_serialize
+                    as unsafe extern "C" fn(_: *mut ffi::c_void, _: *mut u8) -> u32,
+            ),
+            deserialize: Some(
+                tree_sitter_rust_external_scanner_deserialize
+                    as unsafe extern "C" fn(_: *mut ffi::c_void, _: *const u8, _: u32) -> (),
+            ),
+        },
+        field_count: 28,
+        field_map_slices: ts_field_map_slices.as_ptr(),
+        field_map_entries: ts_field_map_entries.as_ptr(),
+        field_names: ts_field_names.as_ptr() as *mut _,
+        large_state_count: 538,
+        small_parse_table: ts_small_parse_table.as_ptr() as *mut _ as *const u16,
+        small_parse_table_map: ts_small_parse_table_map.as_ptr() as *mut _ as *const u32,
+        public_symbol_map: ts_symbol_map.as_ptr() as *mut _,
     };
-    return &mut language;
+    language
 }
