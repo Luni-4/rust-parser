@@ -11,6 +11,7 @@
 use std::ffi;
 
 use crate::parser_api::*;
+use crate::scanner::*;
 
 /*pub const ts_external_scanner_symbol_map: [TSSymbol; 4] = [
     sym__string_content,
@@ -64,7 +65,8 @@ pub unsafe extern "C" fn tree_sitter_rust() -> TSLanguage {
         external_scanner: TSLanguageExternalScanner {
             states: ts_external_scanner_states.as_ptr() as *mut _ as *const bool,
             symbol_map: ts_external_scanner_symbol_map.as_ptr() as *mut _,
-            create: Some(
+            scanner: RustScanner,
+            /*create: Some(
                 tree_sitter_rust_external_scanner_create
                     as unsafe extern "C" fn() -> *mut ffi::c_void,
             ),
@@ -87,7 +89,7 @@ pub unsafe extern "C" fn tree_sitter_rust() -> TSLanguage {
             deserialize: Some(
                 tree_sitter_rust_external_scanner_deserialize
                     as unsafe extern "C" fn(_: *mut ffi::c_void, _: *const u8, _: u32) -> (),
-            ),
+            ),*/
         },
         field_count: 28,
         field_map_slices: ts_field_map_slices.as_ptr(),

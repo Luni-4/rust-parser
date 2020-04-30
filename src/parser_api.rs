@@ -10,6 +10,19 @@ pub const TSParseActionTypeAccept: TSParseActionType = 2;
 pub const TSParseActionTypeReduce: TSParseActionType = 1;
 pub const TSParseActionTypeShift: TSParseActionType = 0;
 
+pub trait Scanner {
+    fn tree_sitter_external_scanner_create() -> Self;
+    //fn tree_sitter_external_scanner_destroy(&mut self);
+    fn tree_sitter_external_scanner_reset(&mut self);
+    fn tree_sitter_external_scanner_scan(
+        &mut self,
+        lexer: &mut TSLexer,
+        valid_symbols: &[bool],
+    ) -> bool;
+    fn tree_sitter_external_scanner_serialize(&mut self, buffer: &mut [u8]) -> u32;
+    fn tree_sitter_external_scanner_deserialize(&mut self, buffer: &mut [u8], n: u32);
+}
+
 pub struct TSFieldMapEntry {
     pub field_id: TSFieldId,
     pub child_index: u8,
@@ -29,11 +42,11 @@ pub struct TSSymbolMetadata {
 pub struct TSLexer {
     pub lookahead: i32,
     pub result_symbol: TSSymbol,
-    pub advance: Option<unsafe extern "C" fn(_: *mut TSLexer, _: bool) -> ()>,
-    pub mark_end: Option<unsafe extern "C" fn(_: *mut TSLexer) -> ()>,
-    pub get_column: Option<unsafe extern "C" fn(_: *mut TSLexer) -> u32>,
-    pub is_at_included_range_start: Option<unsafe extern "C" fn(_: *const TSLexer) -> bool>,
-    pub eof: Option<unsafe extern "C" fn(_: *const TSLexer) -> bool>,
+    pub advance: Option<fn(_: &mut TSLexer, _: bool) -> ()>,
+    pub mark_end: Option<fn(_: &mut TSLexer) -> ()>,
+    pub get_column: Option<fn(_: &mut TSLexer) -> u32>,
+    pub is_at_included_range_start: Option<fn(_: &TSLexer) -> bool>,
+    pub eof: Option<fn(_: &TSLexer) -> bool>,
 }
 
 #[derive(Copy, Clone)]
@@ -93,8 +106,8 @@ pub struct TSLanguage {
     pub lex_modes: *const TSLexMode,
     pub alias_sequences: *const TSSymbol,
     pub max_alias_sequence_length: u16,
-    pub lex_fn: Option<unsafe extern "C" fn(_: *mut TSLexer, _: TSStateId) -> bool>,
-    pub keyword_lex_fn: Option<unsafe extern "C" fn(_: *mut TSLexer, _: TSStateId) -> bool>,
+    pub lex_fn: Option<fn(_: &mut TSLexer, _: TSStateId) -> bool>,
+    pub keyword_lex_fn: Option<fn(_: &mut TSLexer, _: TSStateId) -> bool>,
     pub keyword_capture_token: TSSymbol,
     pub external_scanner: TSLanguageExternalScanner,
     pub field_count: u32,
@@ -110,18 +123,5 @@ pub struct TSLanguage {
 pub struct TSLanguageExternalScanner {
     pub states: *const bool,
     pub symbol_map: *const TSSymbol,
-    pub create: Option<unsafe extern "C" fn() -> *mut ffi::c_void>,
-    pub destroy: Option<unsafe extern "C" fn(_: *mut ffi::c_void) -> ()>,
-    pub scan:
-        Option<unsafe extern "C" fn(_: *mut ffi::c_void, _: *mut TSLexer, _: *const bool) -> bool>,
-    pub serialize: Option<
-        unsafe extern "C" fn(_: *mut ffi::c_void, _: *mut os::raw::c_char) -> os::raw::c_uint,
-    >,
-    pub deserialize: Option<
-        unsafe extern "C" fn(
-            _: *mut ffi::c_void,
-            _: *const os::raw::c_char,
-            _: os::raw::c_uint,
-        ) -> (),
-    >,
+    pub scanner: Scanner,
 }
