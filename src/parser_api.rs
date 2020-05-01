@@ -1,5 +1,3 @@
-use std::{ffi, os};
-
 pub type TSSymbol = u16;
 pub type TSFieldId = u16;
 pub type TSStateId = u16;
@@ -93,13 +91,13 @@ pub struct TSParseActionEntryContent {
     pub reusable: bool,
 }
 
-pub struct TSLanguage {
+pub struct TSLanguage<S: Scanner> {
     pub version: u32,
     pub symbol_count: u32,
     pub alias_count: u32,
     pub token_count: u32,
     pub external_token_count: u32,
-    pub symbol_names: *mut *const os::raw::c_char,
+    pub symbol_names: *mut *const i8,
     pub symbol_metadata: *const TSSymbolMetadata,
     pub parse_table: *const u16,
     pub parse_actions: *const TSParseActionEntry,
@@ -109,19 +107,19 @@ pub struct TSLanguage {
     pub lex_fn: Option<fn(_: &mut TSLexer, _: TSStateId) -> bool>,
     pub keyword_lex_fn: Option<fn(_: &mut TSLexer, _: TSStateId) -> bool>,
     pub keyword_capture_token: TSSymbol,
-    pub external_scanner: TSLanguageExternalScanner,
+    pub external_scanner: TSLanguageExternalScanner<S>,
     pub field_count: u32,
     pub field_map_slices: *const TSFieldMapSlice,
     pub field_map_entries: *const TSFieldMapEntry,
-    pub field_names: *mut *const os::raw::c_char,
+    pub field_names: *mut *const i8,
     pub large_state_count: u32,
     pub small_parse_table: *const u16,
     pub small_parse_table_map: *const u32,
     pub public_symbol_map: *const TSSymbol,
 }
 
-pub struct TSLanguageExternalScanner {
+pub struct TSLanguageExternalScanner<S: Scanner> {
     pub states: *const bool,
     pub symbol_map: *const TSSymbol,
-    pub scanner: Scanner,
+    pub scanner: S,
 }

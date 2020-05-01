@@ -27,8 +27,3 @@ pub(crate) fn iswalpha(wc: u32) -> i32 {
         0
     }
 }
-
-// Credits: (musl libc library)[https://www.musl-libc.org/]
-pub(crate) fn iswalnum(wc: u32) -> i32 {
-    (iswdigit(wc) != 0 || iswalpha(wc) != 0) as i32
-}

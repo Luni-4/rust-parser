@@ -43,7 +43,7 @@ static mut ts_parse_actions: [TSParseActionEntry; 5597] = [TSParseActionEntry {
     },
 }; 5597];
 
-pub unsafe extern "C" fn tree_sitter_rust() -> TSLanguage {
+/*pub unsafe extern "C" fn tree_sitter_rust<S: Scanner>() -> TSLanguage<S> {
     let language = TSLanguage {
         version: 11,
         symbol_count: 312,
@@ -66,30 +66,6 @@ pub unsafe extern "C" fn tree_sitter_rust() -> TSLanguage {
             states: ts_external_scanner_states.as_ptr() as *mut _ as *const bool,
             symbol_map: ts_external_scanner_symbol_map.as_ptr() as *mut _,
             scanner: RustScanner,
-            /*create: Some(
-                tree_sitter_rust_external_scanner_create
-                    as unsafe extern "C" fn() -> *mut ffi::c_void,
-            ),
-            destroy: Some(
-                tree_sitter_rust_external_scanner_destroy
-                    as unsafe extern "C" fn(_: *mut ffi::c_void) -> (),
-            ),
-            scan: Some(
-                tree_sitter_rust_external_scanner_scan
-                    as unsafe extern "C" fn(
-                        _: *mut ffi::c_void,
-                        _: *mut TSLexer,
-                        _: *const bool,
-                    ) -> bool,
-            ),
-            serialize: Some(
-                tree_sitter_rust_external_scanner_serialize
-                    as unsafe extern "C" fn(_: *mut ffi::c_void, _: *mut u8) -> u32,
-            ),
-            deserialize: Some(
-                tree_sitter_rust_external_scanner_deserialize
-                    as unsafe extern "C" fn(_: *mut ffi::c_void, _: *const u8, _: u32) -> (),
-            ),*/
         },
         field_count: 28,
         field_map_slices: ts_field_map_slices.as_ptr(),
@@ -101,4 +77,4 @@ pub unsafe extern "C" fn tree_sitter_rust() -> TSLanguage {
         public_symbol_map: ts_symbol_map.as_ptr() as *mut _,
     };
     language
-}
+}*/
