@@ -15,6 +15,7 @@ use crate::field_map_entries::*;
 use crate::field_map_slices::*;
 use crate::parser_api::*;
 use crate::scanner::*;
+use crate::ts_symbol_metadata::*;
 
 pub const ts_external_scanner_symbol_map: [TSSymbol; 4] = [
     sym__string_content,

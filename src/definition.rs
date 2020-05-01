@@ -987,12 +987,6 @@ pub const ts_symbol_map: [TSSymbol; 316] = [
     alias_sym_type_identifier,
 ];
 
-// Initialized in run_static_initializers
-static mut ts_symbol_metadata: [TSSymbolMetadata; 316] = [TSSymbolMetadata {
-    visible: false,
-    named: false,
-}; 316];
-
 pub const ts_field_names: [&'static [u8]; 29] = [
     b"",
     b"alias\x00",
