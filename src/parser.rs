@@ -10,6 +10,7 @@
 
 use std::ffi;
 
+use crate::definition::*;
 use crate::parser_api::*;
 use crate::scanner::*;
 

@@ -32,6 +32,7 @@ pub struct TSFieldMapSlice {
     pub length: u16,
 }
 
+#[derive(Copy, Clone)]
 pub struct TSSymbolMetadata {
     pub visible: bool,
     pub named: bool,

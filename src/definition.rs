@@ -1,319 +1,323 @@
+#![allow(non_upper_case_globals)]
+
+use crate::parser_api::*;
+
 // Sym identifier
-pub const alias_sym_type_identifier: u32 = 315;
-pub const alias_sym_shorthand_field_identifier: u32 = 314;
-pub const alias_sym_primitive_type: u32 = 313;
-pub const alias_sym_field_identifier: u32 = 312;
-pub const aux_sym_string_literal_repeat1: u32 = 311;
-pub const aux_sym_struct_pattern_repeat1: u32 = 310;
-pub const aux_sym_tuple_pattern_repeat1: u32 = 309;
-pub const aux_sym_closure_parameters_repeat1: u32 = 308;
-pub const aux_sym_match_pattern_repeat1: u32 = 307;
-pub const aux_sym_match_block_repeat1: u32 = 306;
-pub const aux_sym_field_initializer_list_repeat1: u32 = 305;
-pub const aux_sym_tuple_expression_repeat1: u32 = 304;
-pub const aux_sym_array_expression_repeat1: u32 = 303;
-pub const aux_sym_arguments_repeat1: u32 = 302;
-pub const aux_sym_type_arguments_repeat1: u32 = 301;
-pub const aux_sym_tuple_type_repeat1: u32 = 300;
-pub const aux_sym_for_lifetimes_repeat1: u32 = 299;
-pub const aux_sym_parameters_repeat1: u32 = 298;
-pub const aux_sym_use_list_repeat1: u32 = 297;
-pub const aux_sym_type_parameters_repeat1: u32 = 296;
-pub const aux_sym_trait_bounds_repeat1: u32 = 295;
-pub const aux_sym_where_clause_repeat1: u32 = 294;
-pub const aux_sym_function_modifiers_repeat1: u32 = 293;
-pub const aux_sym_ordered_field_declaration_list_repeat1: u32 = 292;
-pub const aux_sym_field_declaration_list_repeat1: u32 = 291;
-pub const aux_sym_enum_variant_list_repeat2: u32 = 290;
-pub const aux_sym_enum_variant_list_repeat1: u32 = 289;
-pub const aux_sym_declaration_list_repeat1: u32 = 288;
-pub const aux_sym_meta_arguments_repeat1: u32 = 287;
-pub const aux_sym_token_tree_repeat1: u32 = 286;
-pub const aux_sym_token_tree_pattern_repeat1: u32 = 285;
-pub const aux_sym_macro_definition_repeat1: u32 = 284;
-pub const aux_sym_source_file_repeat1: u32 = 283;
-pub const sym_boolean_literal: u32 = 282;
-pub const sym_string_literal: u32 = 281;
-pub const sym_negative_literal: u32 = 280;
-pub const sym__literal_pattern: u32 = 279;
-pub const sym__literal: u32 = 278;
-pub const sym_reference_pattern: u32 = 277;
-pub const sym_captured_pattern: u32 = 276;
-pub const sym_ref_pattern: u32 = 275;
-pub const sym_range_pattern: u32 = 274;
-pub const sym_mut_pattern: u32 = 273;
-pub const sym_remaining_field_pattern: u32 = 272;
-pub const sym_field_pattern: u32 = 271;
-pub const sym_struct_pattern: u32 = 270;
-pub const sym_tuple_struct_pattern: u32 = 269;
-pub const sym_slice_pattern: u32 = 268;
-pub const sym_tuple_pattern: u32 = 267;
-pub const sym__pattern: u32 = 266;
-pub const sym_block: u32 = 265;
-pub const sym_async_block: u32 = 264;
-pub const sym_unsafe_block: u32 = 263;
-pub const sym_field_expression: u32 = 262;
-pub const sym_await_expression: u32 = 261;
-pub const sym_index_expression: u32 = 260;
-pub const sym_continue_expression: u32 = 259;
-pub const sym_break_expression: u32 = 258;
-pub const sym_loop_label: u32 = 257;
-pub const sym_closure_parameters: u32 = 256;
-pub const sym_closure_expression: u32 = 255;
-pub const sym_for_expression: u32 = 254;
-pub const sym_loop_expression: u32 = 253;
-pub const sym_while_let_expression: u32 = 252;
-pub const sym_while_expression: u32 = 251;
-pub const sym_match_pattern: u32 = 250;
-pub const sym_last_match_arm: u32 = 249;
-pub const sym_match_arm: u32 = 248;
-pub const sym_match_block: u32 = 247;
-pub const sym_match_expression: u32 = 246;
-pub const sym__else_tail: u32 = 245;
-pub const sym_if_let_expression: u32 = 244;
-pub const sym_if_expression: u32 = 243;
-pub const sym_base_field_initializer: u32 = 242;
-pub const sym_field_initializer: u32 = 241;
-pub const sym_shorthand_field_initializer: u32 = 240;
-pub const sym_field_initializer_list: u32 = 239;
-pub const sym_struct_expression: u32 = 238;
-pub const sym_unit_expression: u32 = 237;
-pub const sym_tuple_expression: u32 = 236;
-pub const sym_parenthesized_expression: u32 = 235;
-pub const sym_array_expression: u32 = 234;
-pub const sym_arguments: u32 = 233;
-pub const sym_call_expression: u32 = 232;
-pub const sym_return_expression: u32 = 231;
-pub const sym_type_cast_expression: u32 = 230;
-pub const sym_compound_assignment_expr: u32 = 229;
-pub const sym_assignment_expression: u32 = 228;
-pub const sym_binary_expression: u32 = 227;
-pub const sym_reference_expression: u32 = 226;
-pub const sym_try_expression: u32 = 225;
-pub const sym_unary_expression: u32 = 224;
-pub const sym_range_expression: u32 = 223;
-pub const sym_scoped_type_identifier: u32 = 222;
-pub const sym_scoped_type_identifier_in_expression_position: u32 = 221;
-pub const sym_scoped_identifier: u32 = 220;
-pub const sym_macro_invocation: u32 = 219;
-pub const sym__expression: u32 = 218;
-pub const sym_dynamic_type: u32 = 217;
-pub const sym_abstract_type: u32 = 216;
-pub const sym_empty_type: u32 = 215;
-pub const sym_pointer_type: u32 = 214;
-pub const sym_reference_type: u32 = 213;
-pub const sym_type_binding: u32 = 212;
-pub const sym_type_arguments: u32 = 211;
-pub const sym_bounded_type: u32 = 210;
-pub const sym_generic_type_with_turbofish: u32 = 209;
-pub const sym_generic_type: u32 = 208;
-pub const sym_generic_function: u32 = 207;
-pub const sym_unit_type: u32 = 206;
-pub const sym_tuple_type: u32 = 205;
-pub const sym_function_type: u32 = 204;
-pub const sym_for_lifetimes: u32 = 203;
-pub const sym_array_type: u32 = 202;
-pub const sym_lifetime: u32 = 201;
-pub const sym_qualified_type: u32 = 200;
-pub const sym_bracketed_type: u32 = 199;
-pub const sym__type: u32 = 198;
-pub const sym_visibility_modifier: u32 = 197;
-pub const sym_extern_modifier: u32 = 196;
-pub const sym_parameter: u32 = 195;
-pub const sym_variadic_parameter: u32 = 194;
-pub const sym_self_parameter: u32 = 193;
-pub const sym_parameters: u32 = 192;
-pub const sym_use_wildcard: u32 = 191;
-pub const sym_use_as_clause: u32 = 190;
-pub const sym_use_list: u32 = 189;
-pub const sym_scoped_use_list: u32 = 188;
-pub const sym__use_clause: u32 = 187;
-pub const sym_use_declaration: u32 = 186;
-pub const sym_let_declaration: u32 = 185;
-pub const sym_optional_type_parameter: u32 = 184;
-pub const sym_constrained_type_parameter: u32 = 183;
-pub const sym_const_parameter: u32 = 182;
-pub const sym_type_parameters: u32 = 181;
-pub const sym_removed_trait_bound: u32 = 180;
-pub const sym_higher_ranked_trait_bound: u32 = 179;
-pub const sym_trait_bounds: u32 = 178;
-pub const sym_associated_type: u32 = 177;
-pub const sym_trait_item: u32 = 176;
-pub const sym_impl_item: u32 = 175;
-pub const sym_where_predicate: u32 = 174;
-pub const sym_where_clause: u32 = 173;
-pub const sym_function_modifiers: u32 = 172;
-pub const sym_function_signature_item: u32 = 171;
-pub const sym_function_item: u32 = 170;
-pub const sym_type_item: u32 = 169;
-pub const sym_static_item: u32 = 168;
-pub const sym_const_item: u32 = 167;
-pub const sym_extern_crate_declaration: u32 = 166;
-pub const sym_ordered_field_declaration_list: u32 = 165;
-pub const sym_field_declaration: u32 = 164;
-pub const sym_field_declaration_list: u32 = 163;
-pub const sym_enum_variant: u32 = 162;
-pub const sym_enum_variant_list: u32 = 161;
-pub const sym_enum_item: u32 = 160;
-pub const sym_union_item: u32 = 159;
-pub const sym_struct_item: u32 = 158;
-pub const sym_declaration_list: u32 = 157;
-pub const sym_foreign_mod_item: u32 = 156;
-pub const sym_mod_item: u32 = 155;
-pub const sym_meta_arguments: u32 = 154;
-pub const sym_meta_item: u32 = 153;
-pub const sym_inner_attribute_item: u32 = 152;
-pub const sym_attribute_item: u32 = 151;
-pub const sym_token_repetition: u32 = 150;
-pub const sym_token_tree: u32 = 149;
-pub const sym_fragment_specifier: u32 = 148;
-pub const sym_token_repetition_pattern: u32 = 147;
-pub const sym_token_binding_pattern: u32 = 146;
-pub const sym_token_tree_pattern: u32 = 145;
-pub const sym__token_pattern: u32 = 144;
-pub const sym_macro_rule: u32 = 143;
-pub const sym_macro_definition: u32 = 142;
-pub const sym__expression_statement: u32 = 141;
-pub const sym_empty_statement: u32 = 140;
-pub const sym__statement: u32 = 139;
-pub const sym_source_file: u32 = 138;
-pub const sym_block_comment: u32 = 137;
-pub const sym_float_literal: u32 = 136;
-pub const sym_raw_string_literal: u32 = 135;
-pub const sym__string_content: u32 = 134;
-pub const sym_metavariable: u32 = 133;
-pub const sym_crate: u32 = 132;
-pub const sym_super: u32 = 131;
-pub const sym_self: u32 = 130;
-pub const sym_line_comment: u32 = 129;
-pub const anon_sym_false: u32 = 128;
-pub const anon_sym_true: u32 = 127;
-pub const sym_escape_sequence: u32 = 126;
-pub const sym_char_literal: u32 = 125;
-pub const anon_sym_DQUOTE: u32 = 124;
-pub const aux_sym_string_literal_token1: u32 = 123;
-pub const sym_integer_literal: u32 = 122;
-pub const anon_sym_AT: u32 = 121;
-pub const anon_sym_DOT: u32 = 120;
-pub const anon_sym_move: u32 = 119;
-pub const anon_sym_else: u32 = 118;
-pub const anon_sym_GT_GT_EQ: u32 = 117;
-pub const anon_sym_LT_LT_EQ: u32 = 116;
-pub const anon_sym_CARET_EQ: u32 = 115;
-pub const anon_sym_PIPE_EQ: u32 = 114;
-pub const anon_sym_AMP_EQ: u32 = 113;
-pub const anon_sym_PERCENT_EQ: u32 = 112;
-pub const anon_sym_SLASH_EQ: u32 = 111;
-pub const anon_sym_STAR_EQ: u32 = 110;
-pub const anon_sym_DASH_EQ: u32 = 109;
-pub const anon_sym_PLUS_EQ: u32 = 108;
-pub const anon_sym_PERCENT: u32 = 107;
-pub const anon_sym_SLASH: u32 = 106;
-pub const anon_sym_GT_GT: u32 = 105;
-pub const anon_sym_LT_LT: u32 = 104;
-pub const anon_sym_GT_EQ: u32 = 103;
-pub const anon_sym_LT_EQ: u32 = 102;
-pub const anon_sym_BANG_EQ: u32 = 101;
-pub const anon_sym_EQ_EQ: u32 = 100;
-pub const anon_sym_CARET: u32 = 99;
-pub const anon_sym_PIPE: u32 = 98;
-pub const anon_sym_PIPE_PIPE: u32 = 97;
-pub const anon_sym_AMP_AMP: u32 = 96;
-pub const anon_sym_DASH: u32 = 95;
-pub const anon_sym_DOT_DOT_EQ: u32 = 94;
-pub const anon_sym_DOT_DOT: u32 = 93;
-pub const sym_mutable_specifier: u32 = 92;
-pub const anon_sym_dyn: u32 = 91;
-pub const anon_sym_LT2: u32 = 90;
-pub const anon_sym_in: u32 = 89;
-pub const anon_sym_DOT_DOT_DOT: u32 = 88;
-pub const anon_sym_AMP: u32 = 87;
-pub const anon_sym__: u32 = 86;
-pub const anon_sym_COLON_COLON: u32 = 85;
-pub const anon_sym_GT: u32 = 84;
-pub const anon_sym_LT: u32 = 83;
-pub const anon_sym_DASH_GT: u32 = 82;
-pub const anon_sym_ref: u32 = 81;
-pub const anon_sym_extern: u32 = 80;
-pub const anon_sym_COMMA: u32 = 79;
-pub const anon_sym_EQ: u32 = 78;
-pub const anon_sym_BANG: u32 = 77;
-pub const anon_sym_POUND: u32 = 76;
-pub const anon_sym_while: u32 = 75;
-pub const anon_sym_where: u32 = 74;
-pub const anon_sym_use: u32 = 73;
-pub const anon_sym_unsafe: u32 = 72;
-pub const anon_sym_union: u32 = 71;
-pub const anon_sym_type: u32 = 70;
-pub const anon_sym_trait: u32 = 69;
-pub const anon_sym_struct: u32 = 68;
-pub const anon_sym_static: u32 = 67;
-pub const anon_sym_return: u32 = 66;
-pub const anon_sym_pub: u32 = 65;
-pub const anon_sym_mod: u32 = 64;
-pub const anon_sym_match: u32 = 63;
-pub const anon_sym_loop: u32 = 62;
-pub const anon_sym_let: u32 = 61;
-pub const anon_sym_impl: u32 = 60;
-pub const anon_sym_if: u32 = 59;
-pub const anon_sym_for: u32 = 58;
-pub const anon_sym_fn: u32 = 57;
-pub const anon_sym_enum: u32 = 56;
-pub const anon_sym_default: u32 = 55;
-pub const anon_sym_continue: u32 = 54;
-pub const anon_sym_const: u32 = 53;
-pub const anon_sym_break: u32 = 52;
-pub const anon_sym_await: u32 = 51;
-pub const anon_sym_async: u32 = 50;
-pub const anon_sym_as: u32 = 49;
-pub const anon_sym_SQUOTE: u32 = 48;
-pub const aux_sym__non_special_token_token1: u32 = 47;
-pub const anon_sym_char: u32 = 46;
-pub const anon_sym_str: u32 = 45;
-pub const anon_sym_bool: u32 = 44;
-pub const anon_sym_f64: u32 = 43;
-pub const anon_sym_f32: u32 = 42;
-pub const anon_sym_usize: u32 = 41;
-pub const anon_sym_isize: u32 = 40;
-pub const anon_sym_i128: u32 = 39;
-pub const anon_sym_u128: u32 = 38;
-pub const anon_sym_i64: u32 = 37;
-pub const anon_sym_u64: u32 = 36;
-pub const anon_sym_i32: u32 = 35;
-pub const anon_sym_u32: u32 = 34;
-pub const anon_sym_i16: u32 = 33;
-pub const anon_sym_u16: u32 = 32;
-pub const anon_sym_i8: u32 = 31;
-pub const anon_sym_u8: u32 = 30;
-pub const anon_sym_vis: u32 = 29;
-pub const anon_sym_ty: u32 = 28;
-pub const anon_sym_tt: u32 = 27;
-pub const anon_sym_stmt: u32 = 26;
-pub const anon_sym_path: u32 = 25;
-pub const anon_sym_pat: u32 = 24;
-pub const anon_sym_meta: u32 = 23;
-pub const anon_sym_literal: u32 = 22;
-pub const anon_sym_lifetime: u32 = 21;
-pub const anon_sym_item: u32 = 20;
-pub const anon_sym_ident: u32 = 19;
-pub const anon_sym_expr: u32 = 18;
-pub const anon_sym_block: u32 = 17;
-pub const anon_sym_QMARK: u32 = 16;
-pub const anon_sym_STAR: u32 = 15;
-pub const anon_sym_PLUS: u32 = 14;
-pub const aux_sym_token_repetition_pattern_token1: u32 = 13;
-pub const anon_sym_DOLLAR: u32 = 12;
-pub const anon_sym_COLON: u32 = 11;
-pub const anon_sym_RBRACK: u32 = 10;
-pub const anon_sym_LBRACK: u32 = 9;
-pub const anon_sym_EQ_GT: u32 = 8;
-pub const anon_sym_RBRACE: u32 = 7;
-pub const anon_sym_LBRACE: u32 = 6;
-pub const anon_sym_RPAREN: u32 = 5;
-pub const anon_sym_LPAREN: u32 = 4;
-pub const anon_sym_macro_rules_BANG: u32 = 3;
-pub const anon_sym_SEMI: u32 = 2;
-pub const sym_identifier: u32 = 1;
+pub const alias_sym_type_identifier: u16 = 315;
+pub const alias_sym_shorthand_field_identifier: u16 = 314;
+pub const alias_sym_primitive_type: u16 = 313;
+pub const alias_sym_field_identifier: u16 = 312;
+pub const aux_sym_string_literal_repeat1: u16 = 311;
+pub const aux_sym_struct_pattern_repeat1: u16 = 310;
+pub const aux_sym_tuple_pattern_repeat1: u16 = 309;
+pub const aux_sym_closure_parameters_repeat1: u16 = 308;
+pub const aux_sym_match_pattern_repeat1: u16 = 307;
+pub const aux_sym_match_block_repeat1: u16 = 306;
+pub const aux_sym_field_initializer_list_repeat1: u16 = 305;
+pub const aux_sym_tuple_expression_repeat1: u16 = 304;
+pub const aux_sym_array_expression_repeat1: u16 = 303;
+pub const aux_sym_arguments_repeat1: u16 = 302;
+pub const aux_sym_type_arguments_repeat1: u16 = 301;
+pub const aux_sym_tuple_type_repeat1: u16 = 300;
+pub const aux_sym_for_lifetimes_repeat1: u16 = 299;
+pub const aux_sym_parameters_repeat1: u16 = 298;
+pub const aux_sym_use_list_repeat1: u16 = 297;
+pub const aux_sym_type_parameters_repeat1: u16 = 296;
+pub const aux_sym_trait_bounds_repeat1: u16 = 295;
+pub const aux_sym_where_clause_repeat1: u16 = 294;
+pub const aux_sym_function_modifiers_repeat1: u16 = 293;
+pub const aux_sym_ordered_field_declaration_list_repeat1: u16 = 292;
+pub const aux_sym_field_declaration_list_repeat1: u16 = 291;
+pub const aux_sym_enum_variant_list_repeat2: u16 = 290;
+pub const aux_sym_enum_variant_list_repeat1: u16 = 289;
+pub const aux_sym_declaration_list_repeat1: u16 = 288;
+pub const aux_sym_meta_arguments_repeat1: u16 = 287;
+pub const aux_sym_token_tree_repeat1: u16 = 286;
+pub const aux_sym_token_tree_pattern_repeat1: u16 = 285;
+pub const aux_sym_macro_definition_repeat1: u16 = 284;
+pub const aux_sym_source_file_repeat1: u16 = 283;
+pub const sym_boolean_literal: u16 = 282;
+pub const sym_string_literal: u16 = 281;
+pub const sym_negative_literal: u16 = 280;
+pub const sym__literal_pattern: u16 = 279;
+pub const sym__literal: u16 = 278;
+pub const sym_reference_pattern: u16 = 277;
+pub const sym_captured_pattern: u16 = 276;
+pub const sym_ref_pattern: u16 = 275;
+pub const sym_range_pattern: u16 = 274;
+pub const sym_mut_pattern: u16 = 273;
+pub const sym_remaining_field_pattern: u16 = 272;
+pub const sym_field_pattern: u16 = 271;
+pub const sym_struct_pattern: u16 = 270;
+pub const sym_tuple_struct_pattern: u16 = 269;
+pub const sym_slice_pattern: u16 = 268;
+pub const sym_tuple_pattern: u16 = 267;
+pub const sym__pattern: u16 = 266;
+pub const sym_block: u16 = 265;
+pub const sym_async_block: u16 = 264;
+pub const sym_unsafe_block: u16 = 263;
+pub const sym_field_expression: u16 = 262;
+pub const sym_await_expression: u16 = 261;
+pub const sym_index_expression: u16 = 260;
+pub const sym_continue_expression: u16 = 259;
+pub const sym_break_expression: u16 = 258;
+pub const sym_loop_label: u16 = 257;
+pub const sym_closure_parameters: u16 = 256;
+pub const sym_closure_expression: u16 = 255;
+pub const sym_for_expression: u16 = 254;
+pub const sym_loop_expression: u16 = 253;
+pub const sym_while_let_expression: u16 = 252;
+pub const sym_while_expression: u16 = 251;
+pub const sym_match_pattern: u16 = 250;
+pub const sym_last_match_arm: u16 = 249;
+pub const sym_match_arm: u16 = 248;
+pub const sym_match_block: u16 = 247;
+pub const sym_match_expression: u16 = 246;
+pub const sym__else_tail: u16 = 245;
+pub const sym_if_let_expression: u16 = 244;
+pub const sym_if_expression: u16 = 243;
+pub const sym_base_field_initializer: u16 = 242;
+pub const sym_field_initializer: u16 = 241;
+pub const sym_shorthand_field_initializer: u16 = 240;
+pub const sym_field_initializer_list: u16 = 239;
+pub const sym_struct_expression: u16 = 238;
+pub const sym_unit_expression: u16 = 237;
+pub const sym_tuple_expression: u16 = 236;
+pub const sym_parenthesized_expression: u16 = 235;
+pub const sym_array_expression: u16 = 234;
+pub const sym_arguments: u16 = 233;
+pub const sym_call_expression: u16 = 232;
+pub const sym_return_expression: u16 = 231;
+pub const sym_type_cast_expression: u16 = 230;
+pub const sym_compound_assignment_expr: u16 = 229;
+pub const sym_assignment_expression: u16 = 228;
+pub const sym_binary_expression: u16 = 227;
+pub const sym_reference_expression: u16 = 226;
+pub const sym_try_expression: u16 = 225;
+pub const sym_unary_expression: u16 = 224;
+pub const sym_range_expression: u16 = 223;
+pub const sym_scoped_type_identifier: u16 = 222;
+pub const sym_scoped_type_identifier_in_expression_position: u16 = 221;
+pub const sym_scoped_identifier: u16 = 220;
+pub const sym_macro_invocation: u16 = 219;
+pub const sym__expression: u16 = 218;
+pub const sym_dynamic_type: u16 = 217;
+pub const sym_abstract_type: u16 = 216;
+pub const sym_empty_type: u16 = 215;
+pub const sym_pointer_type: u16 = 214;
+pub const sym_reference_type: u16 = 213;
+pub const sym_type_binding: u16 = 212;
+pub const sym_type_arguments: u16 = 211;
+pub const sym_bounded_type: u16 = 210;
+pub const sym_generic_type_with_turbofish: u16 = 209;
+pub const sym_generic_type: u16 = 208;
+pub const sym_generic_function: u16 = 207;
+pub const sym_unit_type: u16 = 206;
+pub const sym_tuple_type: u16 = 205;
+pub const sym_function_type: u16 = 204;
+pub const sym_for_lifetimes: u16 = 203;
+pub const sym_array_type: u16 = 202;
+pub const sym_lifetime: u16 = 201;
+pub const sym_qualified_type: u16 = 200;
+pub const sym_bracketed_type: u16 = 199;
+pub const sym__type: u16 = 198;
+pub const sym_visibility_modifier: u16 = 197;
+pub const sym_extern_modifier: u16 = 196;
+pub const sym_parameter: u16 = 195;
+pub const sym_variadic_parameter: u16 = 194;
+pub const sym_self_parameter: u16 = 193;
+pub const sym_parameters: u16 = 192;
+pub const sym_use_wildcard: u16 = 191;
+pub const sym_use_as_clause: u16 = 190;
+pub const sym_use_list: u16 = 189;
+pub const sym_scoped_use_list: u16 = 188;
+pub const sym__use_clause: u16 = 187;
+pub const sym_use_declaration: u16 = 186;
+pub const sym_let_declaration: u16 = 185;
+pub const sym_optional_type_parameter: u16 = 184;
+pub const sym_constrained_type_parameter: u16 = 183;
+pub const sym_const_parameter: u16 = 182;
+pub const sym_type_parameters: u16 = 181;
+pub const sym_removed_trait_bound: u16 = 180;
+pub const sym_higher_ranked_trait_bound: u16 = 179;
+pub const sym_trait_bounds: u16 = 178;
+pub const sym_associated_type: u16 = 177;
+pub const sym_trait_item: u16 = 176;
+pub const sym_impl_item: u16 = 175;
+pub const sym_where_predicate: u16 = 174;
+pub const sym_where_clause: u16 = 173;
+pub const sym_function_modifiers: u16 = 172;
+pub const sym_function_signature_item: u16 = 171;
+pub const sym_function_item: u16 = 170;
+pub const sym_type_item: u16 = 169;
+pub const sym_static_item: u16 = 168;
+pub const sym_const_item: u16 = 167;
+pub const sym_extern_crate_declaration: u16 = 166;
+pub const sym_ordered_field_declaration_list: u16 = 165;
+pub const sym_field_declaration: u16 = 164;
+pub const sym_field_declaration_list: u16 = 163;
+pub const sym_enum_variant: u16 = 162;
+pub const sym_enum_variant_list: u16 = 161;
+pub const sym_enum_item: u16 = 160;
+pub const sym_union_item: u16 = 159;
+pub const sym_struct_item: u16 = 158;
+pub const sym_declaration_list: u16 = 157;
+pub const sym_foreign_mod_item: u16 = 156;
+pub const sym_mod_item: u16 = 155;
+pub const sym_meta_arguments: u16 = 154;
+pub const sym_meta_item: u16 = 153;
+pub const sym_inner_attribute_item: u16 = 152;
+pub const sym_attribute_item: u16 = 151;
+pub const sym_token_repetition: u16 = 150;
+pub const sym_token_tree: u16 = 149;
+pub const sym_fragment_specifier: u16 = 148;
+pub const sym_token_repetition_pattern: u16 = 147;
+pub const sym_token_binding_pattern: u16 = 146;
+pub const sym_token_tree_pattern: u16 = 145;
+pub const sym__token_pattern: u16 = 144;
+pub const sym_macro_rule: u16 = 143;
+pub const sym_macro_definition: u16 = 142;
+pub const sym__expression_statement: u16 = 141;
+pub const sym_empty_statement: u16 = 140;
+pub const sym__statement: u16 = 139;
+pub const sym_source_file: u16 = 138;
+pub const sym_block_comment: u16 = 137;
+pub const sym_float_literal: u16 = 136;
+pub const sym_raw_string_literal: u16 = 135;
+pub const sym__string_content: u16 = 134;
+pub const sym_metavariable: u16 = 133;
+pub const sym_crate: u16 = 132;
+pub const sym_super: u16 = 131;
+pub const sym_self: u16 = 130;
+pub const sym_line_comment: u16 = 129;
+pub const anon_sym_false: u16 = 128;
+pub const anon_sym_true: u16 = 127;
+pub const sym_escape_sequence: u16 = 126;
+pub const sym_char_literal: u16 = 125;
+pub const anon_sym_DQUOTE: u16 = 124;
+pub const aux_sym_string_literal_token1: u16 = 123;
+pub const sym_integer_literal: u16 = 122;
+pub const anon_sym_AT: u16 = 121;
+pub const anon_sym_DOT: u16 = 120;
+pub const anon_sym_move: u16 = 119;
+pub const anon_sym_else: u16 = 118;
+pub const anon_sym_GT_GT_EQ: u16 = 117;
+pub const anon_sym_LT_LT_EQ: u16 = 116;
+pub const anon_sym_CARET_EQ: u16 = 115;
+pub const anon_sym_PIPE_EQ: u16 = 114;
+pub const anon_sym_AMP_EQ: u16 = 113;
+pub const anon_sym_PERCENT_EQ: u16 = 112;
+pub const anon_sym_SLASH_EQ: u16 = 111;
+pub const anon_sym_STAR_EQ: u16 = 110;
+pub const anon_sym_DASH_EQ: u16 = 109;
+pub const anon_sym_PLUS_EQ: u16 = 108;
+pub const anon_sym_PERCENT: u16 = 107;
+pub const anon_sym_SLASH: u16 = 106;
+pub const anon_sym_GT_GT: u16 = 105;
+pub const anon_sym_LT_LT: u16 = 104;
+pub const anon_sym_GT_EQ: u16 = 103;
+pub const anon_sym_LT_EQ: u16 = 102;
+pub const anon_sym_BANG_EQ: u16 = 101;
+pub const anon_sym_EQ_EQ: u16 = 100;
+pub const anon_sym_CARET: u16 = 99;
+pub const anon_sym_PIPE: u16 = 98;
+pub const anon_sym_PIPE_PIPE: u16 = 97;
+pub const anon_sym_AMP_AMP: u16 = 96;
+pub const anon_sym_DASH: u16 = 95;
+pub const anon_sym_DOT_DOT_EQ: u16 = 94;
+pub const anon_sym_DOT_DOT: u16 = 93;
+pub const sym_mutable_specifier: u16 = 92;
+pub const anon_sym_dyn: u16 = 91;
+pub const anon_sym_LT2: u16 = 90;
+pub const anon_sym_in: u16 = 89;
+pub const anon_sym_DOT_DOT_DOT: u16 = 88;
+pub const anon_sym_AMP: u16 = 87;
+pub const anon_sym__: u16 = 86;
+pub const anon_sym_COLON_COLON: u16 = 85;
+pub const anon_sym_GT: u16 = 84;
+pub const anon_sym_LT: u16 = 83;
+pub const anon_sym_DASH_GT: u16 = 82;
+pub const anon_sym_ref: u16 = 81;
+pub const anon_sym_extern: u16 = 80;
+pub const anon_sym_COMMA: u16 = 79;
+pub const anon_sym_EQ: u16 = 78;
+pub const anon_sym_BANG: u16 = 77;
+pub const anon_sym_POUND: u16 = 76;
+pub const anon_sym_while: u16 = 75;
+pub const anon_sym_where: u16 = 74;
+pub const anon_sym_use: u16 = 73;
+pub const anon_sym_unsafe: u16 = 72;
+pub const anon_sym_union: u16 = 71;
+pub const anon_sym_type: u16 = 70;
+pub const anon_sym_trait: u16 = 69;
+pub const anon_sym_struct: u16 = 68;
+pub const anon_sym_static: u16 = 67;
+pub const anon_sym_return: u16 = 66;
+pub const anon_sym_pub: u16 = 65;
+pub const anon_sym_mod: u16 = 64;
+pub const anon_sym_match: u16 = 63;
+pub const anon_sym_loop: u16 = 62;
+pub const anon_sym_let: u16 = 61;
+pub const anon_sym_impl: u16 = 60;
+pub const anon_sym_if: u16 = 59;
+pub const anon_sym_for: u16 = 58;
+pub const anon_sym_fn: u16 = 57;
+pub const anon_sym_enum: u16 = 56;
+pub const anon_sym_default: u16 = 55;
+pub const anon_sym_continue: u16 = 54;
+pub const anon_sym_const: u16 = 53;
+pub const anon_sym_break: u16 = 52;
+pub const anon_sym_await: u16 = 51;
+pub const anon_sym_async: u16 = 50;
+pub const anon_sym_as: u16 = 49;
+pub const anon_sym_SQUOTE: u16 = 48;
+pub const aux_sym__non_special_token_token1: u16 = 47;
+pub const anon_sym_char: u16 = 46;
+pub const anon_sym_str: u16 = 45;
+pub const anon_sym_bool: u16 = 44;
+pub const anon_sym_f64: u16 = 43;
+pub const anon_sym_f32: u16 = 42;
+pub const anon_sym_usize: u16 = 41;
+pub const anon_sym_isize: u16 = 40;
+pub const anon_sym_i128: u16 = 39;
+pub const anon_sym_u128: u16 = 38;
+pub const anon_sym_i64: u16 = 37;
+pub const anon_sym_u64: u16 = 36;
+pub const anon_sym_i32: u16 = 35;
+pub const anon_sym_u32: u16 = 34;
+pub const anon_sym_i16: u16 = 33;
+pub const anon_sym_u16: u16 = 32;
+pub const anon_sym_i8: u16 = 31;
+pub const anon_sym_u8: u16 = 30;
+pub const anon_sym_vis: u16 = 29;
+pub const anon_sym_ty: u16 = 28;
+pub const anon_sym_tt: u16 = 27;
+pub const anon_sym_stmt: u16 = 26;
+pub const anon_sym_path: u16 = 25;
+pub const anon_sym_pat: u16 = 24;
+pub const anon_sym_meta: u16 = 23;
+pub const anon_sym_literal: u16 = 22;
+pub const anon_sym_lifetime: u16 = 21;
+pub const anon_sym_item: u16 = 20;
+pub const anon_sym_ident: u16 = 19;
+pub const anon_sym_expr: u16 = 18;
+pub const anon_sym_block: u16 = 17;
+pub const anon_sym_QMARK: u16 = 16;
+pub const anon_sym_STAR: u16 = 15;
+pub const anon_sym_PLUS: u16 = 14;
+pub const aux_sym_token_repetition_pattern_token1: u16 = 13;
+pub const anon_sym_DOLLAR: u16 = 12;
+pub const anon_sym_COLON: u16 = 11;
+pub const anon_sym_RBRACK: u16 = 10;
+pub const anon_sym_LBRACK: u16 = 9;
+pub const anon_sym_EQ_GT: u16 = 8;
+pub const anon_sym_RBRACE: u16 = 7;
+pub const anon_sym_LBRACE: u16 = 6;
+pub const anon_sym_RPAREN: u16 = 5;
+pub const anon_sym_LPAREN: u16 = 4;
+pub const anon_sym_macro_rules_BANG: u16 = 3;
+pub const anon_sym_SEMI: u16 = 2;
+pub const sym_identifier: u16 = 1;
 
 // Field values
 pub const field_value: u32 = 28;
@@ -345,677 +349,678 @@ pub const field_argument: u32 = 3;
 pub const field_alternative: u32 = 2;
 pub const field_alias: u32 = 1;
 
-static mut ts_symbol_names: [*const libc::c_char; 316] = [
-    b"end\x00" as *const u8 as *const libc::c_char,
-    b"identifier\x00" as *const u8 as *const libc::c_char,
-    b";\x00" as *const u8 as *const libc::c_char,
-    b"macro_rules!\x00" as *const u8 as *const libc::c_char,
-    b"(\x00" as *const u8 as *const libc::c_char,
-    b")\x00" as *const u8 as *const libc::c_char,
-    b"{\x00" as *const u8 as *const libc::c_char,
-    b"}\x00" as *const u8 as *const libc::c_char,
-    b"=>\x00" as *const u8 as *const libc::c_char,
-    b"[\x00" as *const u8 as *const libc::c_char,
-    b"]\x00" as *const u8 as *const libc::c_char,
-    b":\x00" as *const u8 as *const libc::c_char,
-    b"$\x00" as *const u8 as *const libc::c_char,
-    b"token_repetition_pattern_token1\x00" as *const u8 as *const libc::c_char,
-    b"+\x00" as *const u8 as *const libc::c_char,
-    b"*\x00" as *const u8 as *const libc::c_char,
-    b"?\x00" as *const u8 as *const libc::c_char,
-    b"block\x00" as *const u8 as *const libc::c_char,
-    b"expr\x00" as *const u8 as *const libc::c_char,
-    b"ident\x00" as *const u8 as *const libc::c_char,
-    b"item\x00" as *const u8 as *const libc::c_char,
-    b"lifetime\x00" as *const u8 as *const libc::c_char,
-    b"literal\x00" as *const u8 as *const libc::c_char,
-    b"meta\x00" as *const u8 as *const libc::c_char,
-    b"pat\x00" as *const u8 as *const libc::c_char,
-    b"path\x00" as *const u8 as *const libc::c_char,
-    b"stmt\x00" as *const u8 as *const libc::c_char,
-    b"tt\x00" as *const u8 as *const libc::c_char,
-    b"ty\x00" as *const u8 as *const libc::c_char,
-    b"vis\x00" as *const u8 as *const libc::c_char,
-    b"u8\x00" as *const u8 as *const libc::c_char,
-    b"i8\x00" as *const u8 as *const libc::c_char,
-    b"u16\x00" as *const u8 as *const libc::c_char,
-    b"i16\x00" as *const u8 as *const libc::c_char,
-    b"u32\x00" as *const u8 as *const libc::c_char,
-    b"i32\x00" as *const u8 as *const libc::c_char,
-    b"u64\x00" as *const u8 as *const libc::c_char,
-    b"i64\x00" as *const u8 as *const libc::c_char,
-    b"u128\x00" as *const u8 as *const libc::c_char,
-    b"i128\x00" as *const u8 as *const libc::c_char,
-    b"isize\x00" as *const u8 as *const libc::c_char,
-    b"usize\x00" as *const u8 as *const libc::c_char,
-    b"f32\x00" as *const u8 as *const libc::c_char,
-    b"f64\x00" as *const u8 as *const libc::c_char,
-    b"bool\x00" as *const u8 as *const libc::c_char,
-    b"str\x00" as *const u8 as *const libc::c_char,
-    b"char\x00" as *const u8 as *const libc::c_char,
-    b"_non_special_token_token1\x00" as *const u8 as *const libc::c_char,
-    b"\'\x00" as *const u8 as *const libc::c_char,
-    b"as\x00" as *const u8 as *const libc::c_char,
-    b"async\x00" as *const u8 as *const libc::c_char,
-    b"await\x00" as *const u8 as *const libc::c_char,
-    b"break\x00" as *const u8 as *const libc::c_char,
-    b"const\x00" as *const u8 as *const libc::c_char,
-    b"continue\x00" as *const u8 as *const libc::c_char,
-    b"default\x00" as *const u8 as *const libc::c_char,
-    b"enum\x00" as *const u8 as *const libc::c_char,
-    b"fn\x00" as *const u8 as *const libc::c_char,
-    b"for\x00" as *const u8 as *const libc::c_char,
-    b"if\x00" as *const u8 as *const libc::c_char,
-    b"impl\x00" as *const u8 as *const libc::c_char,
-    b"let\x00" as *const u8 as *const libc::c_char,
-    b"loop\x00" as *const u8 as *const libc::c_char,
-    b"match\x00" as *const u8 as *const libc::c_char,
-    b"mod\x00" as *const u8 as *const libc::c_char,
-    b"pub\x00" as *const u8 as *const libc::c_char,
-    b"return\x00" as *const u8 as *const libc::c_char,
-    b"static\x00" as *const u8 as *const libc::c_char,
-    b"struct\x00" as *const u8 as *const libc::c_char,
-    b"trait\x00" as *const u8 as *const libc::c_char,
-    b"type\x00" as *const u8 as *const libc::c_char,
-    b"union\x00" as *const u8 as *const libc::c_char,
-    b"unsafe\x00" as *const u8 as *const libc::c_char,
-    b"use\x00" as *const u8 as *const libc::c_char,
-    b"where\x00" as *const u8 as *const libc::c_char,
-    b"while\x00" as *const u8 as *const libc::c_char,
-    b"#\x00" as *const u8 as *const libc::c_char,
-    b"!\x00" as *const u8 as *const libc::c_char,
-    b"=\x00" as *const u8 as *const libc::c_char,
-    b",\x00" as *const u8 as *const libc::c_char,
-    b"extern\x00" as *const u8 as *const libc::c_char,
-    b"ref\x00" as *const u8 as *const libc::c_char,
-    b"->\x00" as *const u8 as *const libc::c_char,
-    b"<\x00" as *const u8 as *const libc::c_char,
-    b">\x00" as *const u8 as *const libc::c_char,
-    b"::\x00" as *const u8 as *const libc::c_char,
-    b"_\x00" as *const u8 as *const libc::c_char,
-    b"&\x00" as *const u8 as *const libc::c_char,
-    b"...\x00" as *const u8 as *const libc::c_char,
-    b"in\x00" as *const u8 as *const libc::c_char,
-    b"<\x00" as *const u8 as *const libc::c_char,
-    b"dyn\x00" as *const u8 as *const libc::c_char,
-    b"mutable_specifier\x00" as *const u8 as *const libc::c_char,
-    b"..\x00" as *const u8 as *const libc::c_char,
-    b"..=\x00" as *const u8 as *const libc::c_char,
-    b"-\x00" as *const u8 as *const libc::c_char,
-    b"&&\x00" as *const u8 as *const libc::c_char,
-    b"||\x00" as *const u8 as *const libc::c_char,
-    b"|\x00" as *const u8 as *const libc::c_char,
-    b"^\x00" as *const u8 as *const libc::c_char,
-    b"==\x00" as *const u8 as *const libc::c_char,
-    b"!=\x00" as *const u8 as *const libc::c_char,
-    b"<=\x00" as *const u8 as *const libc::c_char,
-    b">=\x00" as *const u8 as *const libc::c_char,
-    b"<<\x00" as *const u8 as *const libc::c_char,
-    b">>\x00" as *const u8 as *const libc::c_char,
-    b"/\x00" as *const u8 as *const libc::c_char,
-    b"%\x00" as *const u8 as *const libc::c_char,
-    b"+=\x00" as *const u8 as *const libc::c_char,
-    b"-=\x00" as *const u8 as *const libc::c_char,
-    b"*=\x00" as *const u8 as *const libc::c_char,
-    b"/=\x00" as *const u8 as *const libc::c_char,
-    b"%=\x00" as *const u8 as *const libc::c_char,
-    b"&=\x00" as *const u8 as *const libc::c_char,
-    b"|=\x00" as *const u8 as *const libc::c_char,
-    b"^=\x00" as *const u8 as *const libc::c_char,
-    b"<<=\x00" as *const u8 as *const libc::c_char,
-    b">>=\x00" as *const u8 as *const libc::c_char,
-    b"else\x00" as *const u8 as *const libc::c_char,
-    b"move\x00" as *const u8 as *const libc::c_char,
-    b".\x00" as *const u8 as *const libc::c_char,
-    b"@\x00" as *const u8 as *const libc::c_char,
-    b"integer_literal\x00" as *const u8 as *const libc::c_char,
-    b"\"\x00" as *const u8 as *const libc::c_char,
-    b"\"\x00" as *const u8 as *const libc::c_char,
-    b"char_literal\x00" as *const u8 as *const libc::c_char,
-    b"escape_sequence\x00" as *const u8 as *const libc::c_char,
-    b"true\x00" as *const u8 as *const libc::c_char,
-    b"false\x00" as *const u8 as *const libc::c_char,
-    b"line_comment\x00" as *const u8 as *const libc::c_char,
-    b"self\x00" as *const u8 as *const libc::c_char,
-    b"super\x00" as *const u8 as *const libc::c_char,
-    b"crate\x00" as *const u8 as *const libc::c_char,
-    b"metavariable\x00" as *const u8 as *const libc::c_char,
-    b"_string_content\x00" as *const u8 as *const libc::c_char,
-    b"raw_string_literal\x00" as *const u8 as *const libc::c_char,
-    b"float_literal\x00" as *const u8 as *const libc::c_char,
-    b"block_comment\x00" as *const u8 as *const libc::c_char,
-    b"source_file\x00" as *const u8 as *const libc::c_char,
-    b"_statement\x00" as *const u8 as *const libc::c_char,
-    b"empty_statement\x00" as *const u8 as *const libc::c_char,
-    b"_expression_statement\x00" as *const u8 as *const libc::c_char,
-    b"macro_definition\x00" as *const u8 as *const libc::c_char,
-    b"macro_rule\x00" as *const u8 as *const libc::c_char,
-    b"_token_pattern\x00" as *const u8 as *const libc::c_char,
-    b"token_tree_pattern\x00" as *const u8 as *const libc::c_char,
-    b"token_binding_pattern\x00" as *const u8 as *const libc::c_char,
-    b"token_repetition_pattern\x00" as *const u8 as *const libc::c_char,
-    b"fragment_specifier\x00" as *const u8 as *const libc::c_char,
-    b"token_tree\x00" as *const u8 as *const libc::c_char,
-    b"token_repetition\x00" as *const u8 as *const libc::c_char,
-    b"attribute_item\x00" as *const u8 as *const libc::c_char,
-    b"inner_attribute_item\x00" as *const u8 as *const libc::c_char,
-    b"meta_item\x00" as *const u8 as *const libc::c_char,
-    b"meta_arguments\x00" as *const u8 as *const libc::c_char,
-    b"mod_item\x00" as *const u8 as *const libc::c_char,
-    b"foreign_mod_item\x00" as *const u8 as *const libc::c_char,
-    b"declaration_list\x00" as *const u8 as *const libc::c_char,
-    b"struct_item\x00" as *const u8 as *const libc::c_char,
-    b"union_item\x00" as *const u8 as *const libc::c_char,
-    b"enum_item\x00" as *const u8 as *const libc::c_char,
-    b"enum_variant_list\x00" as *const u8 as *const libc::c_char,
-    b"enum_variant\x00" as *const u8 as *const libc::c_char,
-    b"field_declaration_list\x00" as *const u8 as *const libc::c_char,
-    b"field_declaration\x00" as *const u8 as *const libc::c_char,
-    b"ordered_field_declaration_list\x00" as *const u8 as *const libc::c_char,
-    b"extern_crate_declaration\x00" as *const u8 as *const libc::c_char,
-    b"const_item\x00" as *const u8 as *const libc::c_char,
-    b"static_item\x00" as *const u8 as *const libc::c_char,
-    b"type_item\x00" as *const u8 as *const libc::c_char,
-    b"function_item\x00" as *const u8 as *const libc::c_char,
-    b"function_signature_item\x00" as *const u8 as *const libc::c_char,
-    b"function_modifiers\x00" as *const u8 as *const libc::c_char,
-    b"where_clause\x00" as *const u8 as *const libc::c_char,
-    b"where_predicate\x00" as *const u8 as *const libc::c_char,
-    b"impl_item\x00" as *const u8 as *const libc::c_char,
-    b"trait_item\x00" as *const u8 as *const libc::c_char,
-    b"associated_type\x00" as *const u8 as *const libc::c_char,
-    b"trait_bounds\x00" as *const u8 as *const libc::c_char,
-    b"higher_ranked_trait_bound\x00" as *const u8 as *const libc::c_char,
-    b"removed_trait_bound\x00" as *const u8 as *const libc::c_char,
-    b"type_parameters\x00" as *const u8 as *const libc::c_char,
-    b"const_parameter\x00" as *const u8 as *const libc::c_char,
-    b"constrained_type_parameter\x00" as *const u8 as *const libc::c_char,
-    b"optional_type_parameter\x00" as *const u8 as *const libc::c_char,
-    b"let_declaration\x00" as *const u8 as *const libc::c_char,
-    b"use_declaration\x00" as *const u8 as *const libc::c_char,
-    b"_use_clause\x00" as *const u8 as *const libc::c_char,
-    b"scoped_use_list\x00" as *const u8 as *const libc::c_char,
-    b"use_list\x00" as *const u8 as *const libc::c_char,
-    b"use_as_clause\x00" as *const u8 as *const libc::c_char,
-    b"use_wildcard\x00" as *const u8 as *const libc::c_char,
-    b"parameters\x00" as *const u8 as *const libc::c_char,
-    b"self_parameter\x00" as *const u8 as *const libc::c_char,
-    b"variadic_parameter\x00" as *const u8 as *const libc::c_char,
-    b"parameter\x00" as *const u8 as *const libc::c_char,
-    b"extern_modifier\x00" as *const u8 as *const libc::c_char,
-    b"visibility_modifier\x00" as *const u8 as *const libc::c_char,
-    b"_type\x00" as *const u8 as *const libc::c_char,
-    b"bracketed_type\x00" as *const u8 as *const libc::c_char,
-    b"qualified_type\x00" as *const u8 as *const libc::c_char,
-    b"lifetime\x00" as *const u8 as *const libc::c_char,
-    b"array_type\x00" as *const u8 as *const libc::c_char,
-    b"for_lifetimes\x00" as *const u8 as *const libc::c_char,
-    b"function_type\x00" as *const u8 as *const libc::c_char,
-    b"tuple_type\x00" as *const u8 as *const libc::c_char,
-    b"unit_type\x00" as *const u8 as *const libc::c_char,
-    b"generic_function\x00" as *const u8 as *const libc::c_char,
-    b"generic_type\x00" as *const u8 as *const libc::c_char,
-    b"generic_type_with_turbofish\x00" as *const u8 as *const libc::c_char,
-    b"bounded_type\x00" as *const u8 as *const libc::c_char,
-    b"type_arguments\x00" as *const u8 as *const libc::c_char,
-    b"type_binding\x00" as *const u8 as *const libc::c_char,
-    b"reference_type\x00" as *const u8 as *const libc::c_char,
-    b"pointer_type\x00" as *const u8 as *const libc::c_char,
-    b"empty_type\x00" as *const u8 as *const libc::c_char,
-    b"abstract_type\x00" as *const u8 as *const libc::c_char,
-    b"dynamic_type\x00" as *const u8 as *const libc::c_char,
-    b"_expression\x00" as *const u8 as *const libc::c_char,
-    b"macro_invocation\x00" as *const u8 as *const libc::c_char,
-    b"scoped_identifier\x00" as *const u8 as *const libc::c_char,
-    b"scoped_type_identifier\x00" as *const u8 as *const libc::c_char,
-    b"scoped_type_identifier\x00" as *const u8 as *const libc::c_char,
-    b"range_expression\x00" as *const u8 as *const libc::c_char,
-    b"unary_expression\x00" as *const u8 as *const libc::c_char,
-    b"try_expression\x00" as *const u8 as *const libc::c_char,
-    b"reference_expression\x00" as *const u8 as *const libc::c_char,
-    b"binary_expression\x00" as *const u8 as *const libc::c_char,
-    b"assignment_expression\x00" as *const u8 as *const libc::c_char,
-    b"compound_assignment_expr\x00" as *const u8 as *const libc::c_char,
-    b"type_cast_expression\x00" as *const u8 as *const libc::c_char,
-    b"return_expression\x00" as *const u8 as *const libc::c_char,
-    b"call_expression\x00" as *const u8 as *const libc::c_char,
-    b"arguments\x00" as *const u8 as *const libc::c_char,
-    b"array_expression\x00" as *const u8 as *const libc::c_char,
-    b"parenthesized_expression\x00" as *const u8 as *const libc::c_char,
-    b"tuple_expression\x00" as *const u8 as *const libc::c_char,
-    b"unit_expression\x00" as *const u8 as *const libc::c_char,
-    b"struct_expression\x00" as *const u8 as *const libc::c_char,
-    b"field_initializer_list\x00" as *const u8 as *const libc::c_char,
-    b"shorthand_field_initializer\x00" as *const u8 as *const libc::c_char,
-    b"field_initializer\x00" as *const u8 as *const libc::c_char,
-    b"base_field_initializer\x00" as *const u8 as *const libc::c_char,
-    b"if_expression\x00" as *const u8 as *const libc::c_char,
-    b"if_let_expression\x00" as *const u8 as *const libc::c_char,
-    b"_else_tail\x00" as *const u8 as *const libc::c_char,
-    b"match_expression\x00" as *const u8 as *const libc::c_char,
-    b"match_block\x00" as *const u8 as *const libc::c_char,
-    b"match_arm\x00" as *const u8 as *const libc::c_char,
-    b"match_arm\x00" as *const u8 as *const libc::c_char,
-    b"match_pattern\x00" as *const u8 as *const libc::c_char,
-    b"while_expression\x00" as *const u8 as *const libc::c_char,
-    b"while_let_expression\x00" as *const u8 as *const libc::c_char,
-    b"loop_expression\x00" as *const u8 as *const libc::c_char,
-    b"for_expression\x00" as *const u8 as *const libc::c_char,
-    b"closure_expression\x00" as *const u8 as *const libc::c_char,
-    b"closure_parameters\x00" as *const u8 as *const libc::c_char,
-    b"loop_label\x00" as *const u8 as *const libc::c_char,
-    b"break_expression\x00" as *const u8 as *const libc::c_char,
-    b"continue_expression\x00" as *const u8 as *const libc::c_char,
-    b"index_expression\x00" as *const u8 as *const libc::c_char,
-    b"await_expression\x00" as *const u8 as *const libc::c_char,
-    b"field_expression\x00" as *const u8 as *const libc::c_char,
-    b"unsafe_block\x00" as *const u8 as *const libc::c_char,
-    b"async_block\x00" as *const u8 as *const libc::c_char,
-    b"block\x00" as *const u8 as *const libc::c_char,
-    b"_pattern\x00" as *const u8 as *const libc::c_char,
-    b"tuple_pattern\x00" as *const u8 as *const libc::c_char,
-    b"slice_pattern\x00" as *const u8 as *const libc::c_char,
-    b"tuple_struct_pattern\x00" as *const u8 as *const libc::c_char,
-    b"struct_pattern\x00" as *const u8 as *const libc::c_char,
-    b"field_pattern\x00" as *const u8 as *const libc::c_char,
-    b"remaining_field_pattern\x00" as *const u8 as *const libc::c_char,
-    b"mut_pattern\x00" as *const u8 as *const libc::c_char,
-    b"range_pattern\x00" as *const u8 as *const libc::c_char,
-    b"ref_pattern\x00" as *const u8 as *const libc::c_char,
-    b"captured_pattern\x00" as *const u8 as *const libc::c_char,
-    b"reference_pattern\x00" as *const u8 as *const libc::c_char,
-    b"_literal\x00" as *const u8 as *const libc::c_char,
-    b"_literal_pattern\x00" as *const u8 as *const libc::c_char,
-    b"negative_literal\x00" as *const u8 as *const libc::c_char,
-    b"string_literal\x00" as *const u8 as *const libc::c_char,
-    b"boolean_literal\x00" as *const u8 as *const libc::c_char,
-    b"source_file_repeat1\x00" as *const u8 as *const libc::c_char,
-    b"macro_definition_repeat1\x00" as *const u8 as *const libc::c_char,
-    b"token_tree_pattern_repeat1\x00" as *const u8 as *const libc::c_char,
-    b"token_tree_repeat1\x00" as *const u8 as *const libc::c_char,
-    b"meta_arguments_repeat1\x00" as *const u8 as *const libc::c_char,
-    b"declaration_list_repeat1\x00" as *const u8 as *const libc::c_char,
-    b"enum_variant_list_repeat1\x00" as *const u8 as *const libc::c_char,
-    b"enum_variant_list_repeat2\x00" as *const u8 as *const libc::c_char,
-    b"field_declaration_list_repeat1\x00" as *const u8 as *const libc::c_char,
-    b"ordered_field_declaration_list_repeat1\x00" as *const u8 as *const libc::c_char,
-    b"function_modifiers_repeat1\x00" as *const u8 as *const libc::c_char,
-    b"where_clause_repeat1\x00" as *const u8 as *const libc::c_char,
-    b"trait_bounds_repeat1\x00" as *const u8 as *const libc::c_char,
-    b"type_parameters_repeat1\x00" as *const u8 as *const libc::c_char,
-    b"use_list_repeat1\x00" as *const u8 as *const libc::c_char,
-    b"parameters_repeat1\x00" as *const u8 as *const libc::c_char,
-    b"for_lifetimes_repeat1\x00" as *const u8 as *const libc::c_char,
-    b"tuple_type_repeat1\x00" as *const u8 as *const libc::c_char,
-    b"type_arguments_repeat1\x00" as *const u8 as *const libc::c_char,
-    b"arguments_repeat1\x00" as *const u8 as *const libc::c_char,
-    b"array_expression_repeat1\x00" as *const u8 as *const libc::c_char,
-    b"tuple_expression_repeat1\x00" as *const u8 as *const libc::c_char,
-    b"field_initializer_list_repeat1\x00" as *const u8 as *const libc::c_char,
-    b"match_block_repeat1\x00" as *const u8 as *const libc::c_char,
-    b"match_pattern_repeat1\x00" as *const u8 as *const libc::c_char,
-    b"closure_parameters_repeat1\x00" as *const u8 as *const libc::c_char,
-    b"tuple_pattern_repeat1\x00" as *const u8 as *const libc::c_char,
-    b"struct_pattern_repeat1\x00" as *const u8 as *const libc::c_char,
-    b"string_literal_repeat1\x00" as *const u8 as *const libc::c_char,
-    b"field_identifier\x00" as *const u8 as *const libc::c_char,
-    b"primitive_type\x00" as *const u8 as *const libc::c_char,
-    b"shorthand_field_identifier\x00" as *const u8 as *const libc::c_char,
-    b"type_identifier\x00" as *const u8 as *const libc::c_char,
+pub const ts_symbol_names: [&'static [u8]; 316] = [
+    b"end\x00",
+    b"identifier\x00",
+    b";\x00",
+    b"macro_rules!\x00",
+    b"(\x00",
+    b")\x00",
+    b"{\x00",
+    b"}\x00",
+    b"=>\x00",
+    b"[\x00",
+    b"]\x00",
+    b":\x00",
+    b"$\x00",
+    b"token_repetition_pattern_token1\x00",
+    b"+\x00",
+    b"*\x00",
+    b"?\x00",
+    b"block\x00",
+    b"expr\x00",
+    b"ident\x00",
+    b"item\x00",
+    b"lifetime\x00",
+    b"literal\x00",
+    b"meta\x00",
+    b"pat\x00",
+    b"path\x00",
+    b"stmt\x00",
+    b"tt\x00",
+    b"ty\x00",
+    b"vis\x00",
+    b"u8\x00",
+    b"i8\x00",
+    b"u16\x00",
+    b"i16\x00",
+    b"u32\x00",
+    b"i32\x00",
+    b"u64\x00",
+    b"i64\x00",
+    b"u128\x00",
+    b"i128\x00",
+    b"isize\x00",
+    b"usize\x00",
+    b"f32\x00",
+    b"f64\x00",
+    b"bool\x00",
+    b"str\x00",
+    b"char\x00",
+    b"_non_special_token_token1\x00",
+    b"\'\x00",
+    b"as\x00",
+    b"async\x00",
+    b"await\x00",
+    b"break\x00",
+    b"const\x00",
+    b"continue\x00",
+    b"default\x00",
+    b"enum\x00",
+    b"fn\x00",
+    b"for\x00",
+    b"if\x00",
+    b"impl\x00",
+    b"let\x00",
+    b"loop\x00",
+    b"match\x00",
+    b"mod\x00",
+    b"pub\x00",
+    b"return\x00",
+    b"static\x00",
+    b"struct\x00",
+    b"trait\x00",
+    b"type\x00",
+    b"union\x00",
+    b"unsafe\x00",
+    b"use\x00",
+    b"where\x00",
+    b"while\x00",
+    b"#\x00",
+    b"!\x00",
+    b"=\x00",
+    b",\x00",
+    b"extern\x00",
+    b"ref\x00",
+    b"->\x00",
+    b"<\x00",
+    b">\x00",
+    b"::\x00",
+    b"_\x00",
+    b"&\x00",
+    b"...\x00",
+    b"in\x00",
+    b"<\x00",
+    b"dyn\x00",
+    b"mutable_specifier\x00",
+    b"..\x00",
+    b"..=\x00",
+    b"-\x00",
+    b"&&\x00",
+    b"||\x00",
+    b"|\x00",
+    b"^\x00",
+    b"==\x00",
+    b"!=\x00",
+    b"<=\x00",
+    b">=\x00",
+    b"<<\x00",
+    b">>\x00",
+    b"/\x00",
+    b"%\x00",
+    b"+=\x00",
+    b"-=\x00",
+    b"*=\x00",
+    b"/=\x00",
+    b"%=\x00",
+    b"&=\x00",
+    b"|=\x00",
+    b"^=\x00",
+    b"<<=\x00",
+    b">>=\x00",
+    b"else\x00",
+    b"move\x00",
+    b".\x00",
+    b"@\x00",
+    b"integer_literal\x00",
+    b"\"\x00",
+    b"\"\x00",
+    b"char_literal\x00",
+    b"escape_sequence\x00",
+    b"true\x00",
+    b"false\x00",
+    b"line_comment\x00",
+    b"self\x00",
+    b"super\x00",
+    b"crate\x00",
+    b"metavariable\x00",
+    b"_string_content\x00",
+    b"raw_string_literal\x00",
+    b"float_literal\x00",
+    b"block_comment\x00",
+    b"source_file\x00",
+    b"_statement\x00",
+    b"empty_statement\x00",
+    b"_expression_statement\x00",
+    b"macro_definition\x00",
+    b"macro_rule\x00",
+    b"_token_pattern\x00",
+    b"token_tree_pattern\x00",
+    b"token_binding_pattern\x00",
+    b"token_repetition_pattern\x00",
+    b"fragment_specifier\x00",
+    b"token_tree\x00",
+    b"token_repetition\x00",
+    b"attribute_item\x00",
+    b"inner_attribute_item\x00",
+    b"meta_item\x00",
+    b"meta_arguments\x00",
+    b"mod_item\x00",
+    b"foreign_mod_item\x00",
+    b"declaration_list\x00",
+    b"struct_item\x00",
+    b"union_item\x00",
+    b"enum_item\x00",
+    b"enum_variant_list\x00",
+    b"enum_variant\x00",
+    b"field_declaration_list\x00",
+    b"field_declaration\x00",
+    b"ordered_field_declaration_list\x00",
+    b"extern_crate_declaration\x00",
+    b"const_item\x00",
+    b"static_item\x00",
+    b"type_item\x00",
+    b"function_item\x00",
+    b"function_signature_item\x00",
+    b"function_modifiers\x00",
+    b"where_clause\x00",
+    b"where_predicate\x00",
+    b"impl_item\x00",
+    b"trait_item\x00",
+    b"associated_type\x00",
+    b"trait_bounds\x00",
+    b"higher_ranked_trait_bound\x00",
+    b"removed_trait_bound\x00",
+    b"type_parameters\x00",
+    b"const_parameter\x00",
+    b"constrained_type_parameter\x00",
+    b"optional_type_parameter\x00",
+    b"let_declaration\x00",
+    b"use_declaration\x00",
+    b"_use_clause\x00",
+    b"scoped_use_list\x00",
+    b"use_list\x00",
+    b"use_as_clause\x00",
+    b"use_wildcard\x00",
+    b"parameters\x00",
+    b"self_parameter\x00",
+    b"variadic_parameter\x00",
+    b"parameter\x00",
+    b"extern_modifier\x00",
+    b"visibility_modifier\x00",
+    b"_type\x00",
+    b"bracketed_type\x00",
+    b"qualified_type\x00",
+    b"lifetime\x00",
+    b"array_type\x00",
+    b"for_lifetimes\x00",
+    b"function_type\x00",
+    b"tuple_type\x00",
+    b"unit_type\x00",
+    b"generic_function\x00",
+    b"generic_type\x00",
+    b"generic_type_with_turbofish\x00",
+    b"bounded_type\x00",
+    b"type_arguments\x00",
+    b"type_binding\x00",
+    b"reference_type\x00",
+    b"pointer_type\x00",
+    b"empty_type\x00",
+    b"abstract_type\x00",
+    b"dynamic_type\x00",
+    b"_expression\x00",
+    b"macro_invocation\x00",
+    b"scoped_identifier\x00",
+    b"scoped_type_identifier\x00",
+    b"scoped_type_identifier\x00",
+    b"range_expression\x00",
+    b"unary_expression\x00",
+    b"try_expression\x00",
+    b"reference_expression\x00",
+    b"binary_expression\x00",
+    b"assignment_expression\x00",
+    b"compound_assignment_expr\x00",
+    b"type_cast_expression\x00",
+    b"return_expression\x00",
+    b"call_expression\x00",
+    b"arguments\x00",
+    b"array_expression\x00",
+    b"parenthesized_expression\x00",
+    b"tuple_expression\x00",
+    b"unit_expression\x00",
+    b"struct_expression\x00",
+    b"field_initializer_list\x00",
+    b"shorthand_field_initializer\x00",
+    b"field_initializer\x00",
+    b"base_field_initializer\x00",
+    b"if_expression\x00",
+    b"if_let_expression\x00",
+    b"_else_tail\x00",
+    b"match_expression\x00",
+    b"match_block\x00",
+    b"match_arm\x00",
+    b"match_arm\x00",
+    b"match_pattern\x00",
+    b"while_expression\x00",
+    b"while_let_expression\x00",
+    b"loop_expression\x00",
+    b"for_expression\x00",
+    b"closure_expression\x00",
+    b"closure_parameters\x00",
+    b"loop_label\x00",
+    b"break_expression\x00",
+    b"continue_expression\x00",
+    b"index_expression\x00",
+    b"await_expression\x00",
+    b"field_expression\x00",
+    b"unsafe_block\x00",
+    b"async_block\x00",
+    b"block\x00",
+    b"_pattern\x00",
+    b"tuple_pattern\x00",
+    b"slice_pattern\x00",
+    b"tuple_struct_pattern\x00",
+    b"struct_pattern\x00",
+    b"field_pattern\x00",
+    b"remaining_field_pattern\x00",
+    b"mut_pattern\x00",
+    b"range_pattern\x00",
+    b"ref_pattern\x00",
+    b"captured_pattern\x00",
+    b"reference_pattern\x00",
+    b"_literal\x00",
+    b"_literal_pattern\x00",
+    b"negative_literal\x00",
+    b"string_literal\x00",
+    b"boolean_literal\x00",
+    b"source_file_repeat1\x00",
+    b"macro_definition_repeat1\x00",
+    b"token_tree_pattern_repeat1\x00",
+    b"token_tree_repeat1\x00",
+    b"meta_arguments_repeat1\x00",
+    b"declaration_list_repeat1\x00",
+    b"enum_variant_list_repeat1\x00",
+    b"enum_variant_list_repeat2\x00",
+    b"field_declaration_list_repeat1\x00",
+    b"ordered_field_declaration_list_repeat1\x00",
+    b"function_modifiers_repeat1\x00",
+    b"where_clause_repeat1\x00",
+    b"trait_bounds_repeat1\x00",
+    b"type_parameters_repeat1\x00",
+    b"use_list_repeat1\x00",
+    b"parameters_repeat1\x00",
+    b"for_lifetimes_repeat1\x00",
+    b"tuple_type_repeat1\x00",
+    b"type_arguments_repeat1\x00",
+    b"arguments_repeat1\x00",
+    b"array_expression_repeat1\x00",
+    b"tuple_expression_repeat1\x00",
+    b"field_initializer_list_repeat1\x00",
+    b"match_block_repeat1\x00",
+    b"match_pattern_repeat1\x00",
+    b"closure_parameters_repeat1\x00",
+    b"tuple_pattern_repeat1\x00",
+    b"struct_pattern_repeat1\x00",
+    b"string_literal_repeat1\x00",
+    b"field_identifier\x00",
+    b"primitive_type\x00",
+    b"shorthand_field_identifier\x00",
+    b"type_identifier\x00",
 ];
 
-static mut ts_symbol_map: [TSSymbol; 316] = [
-    0 as libc::c_int as TSSymbol,
-    sym_identifier as libc::c_int as TSSymbol,
-    anon_sym_SEMI as libc::c_int as TSSymbol,
-    anon_sym_macro_rules_BANG as libc::c_int as TSSymbol,
-    anon_sym_LPAREN as libc::c_int as TSSymbol,
-    anon_sym_RPAREN as libc::c_int as TSSymbol,
-    anon_sym_LBRACE as libc::c_int as TSSymbol,
-    anon_sym_RBRACE as libc::c_int as TSSymbol,
-    anon_sym_EQ_GT as libc::c_int as TSSymbol,
-    anon_sym_LBRACK as libc::c_int as TSSymbol,
-    anon_sym_RBRACK as libc::c_int as TSSymbol,
-    anon_sym_COLON as libc::c_int as TSSymbol,
-    anon_sym_DOLLAR as libc::c_int as TSSymbol,
-    aux_sym_token_repetition_pattern_token1 as libc::c_int as TSSymbol,
-    anon_sym_PLUS as libc::c_int as TSSymbol,
-    anon_sym_STAR as libc::c_int as TSSymbol,
-    anon_sym_QMARK as libc::c_int as TSSymbol,
-    anon_sym_block as libc::c_int as TSSymbol,
-    anon_sym_expr as libc::c_int as TSSymbol,
-    anon_sym_ident as libc::c_int as TSSymbol,
-    anon_sym_item as libc::c_int as TSSymbol,
-    anon_sym_lifetime as libc::c_int as TSSymbol,
-    anon_sym_literal as libc::c_int as TSSymbol,
-    anon_sym_meta as libc::c_int as TSSymbol,
-    anon_sym_pat as libc::c_int as TSSymbol,
-    anon_sym_path as libc::c_int as TSSymbol,
-    anon_sym_stmt as libc::c_int as TSSymbol,
-    anon_sym_tt as libc::c_int as TSSymbol,
-    anon_sym_ty as libc::c_int as TSSymbol,
-    anon_sym_vis as libc::c_int as TSSymbol,
-    anon_sym_u8 as libc::c_int as TSSymbol,
-    anon_sym_i8 as libc::c_int as TSSymbol,
-    anon_sym_u16 as libc::c_int as TSSymbol,
-    anon_sym_i16 as libc::c_int as TSSymbol,
-    anon_sym_u32 as libc::c_int as TSSymbol,
-    anon_sym_i32 as libc::c_int as TSSymbol,
-    anon_sym_u64 as libc::c_int as TSSymbol,
-    anon_sym_i64 as libc::c_int as TSSymbol,
-    anon_sym_u128 as libc::c_int as TSSymbol,
-    anon_sym_i128 as libc::c_int as TSSymbol,
-    anon_sym_isize as libc::c_int as TSSymbol,
-    anon_sym_usize as libc::c_int as TSSymbol,
-    anon_sym_f32 as libc::c_int as TSSymbol,
-    anon_sym_f64 as libc::c_int as TSSymbol,
-    anon_sym_bool as libc::c_int as TSSymbol,
-    anon_sym_str as libc::c_int as TSSymbol,
-    anon_sym_char as libc::c_int as TSSymbol,
-    aux_sym__non_special_token_token1 as libc::c_int as TSSymbol,
-    anon_sym_SQUOTE as libc::c_int as TSSymbol,
-    anon_sym_as as libc::c_int as TSSymbol,
-    anon_sym_async as libc::c_int as TSSymbol,
-    anon_sym_await as libc::c_int as TSSymbol,
-    anon_sym_break as libc::c_int as TSSymbol,
-    anon_sym_const as libc::c_int as TSSymbol,
-    anon_sym_continue as libc::c_int as TSSymbol,
-    anon_sym_default as libc::c_int as TSSymbol,
-    anon_sym_enum as libc::c_int as TSSymbol,
-    anon_sym_fn as libc::c_int as TSSymbol,
-    anon_sym_for as libc::c_int as TSSymbol,
-    anon_sym_if as libc::c_int as TSSymbol,
-    anon_sym_impl as libc::c_int as TSSymbol,
-    anon_sym_let as libc::c_int as TSSymbol,
-    anon_sym_loop as libc::c_int as TSSymbol,
-    anon_sym_match as libc::c_int as TSSymbol,
-    anon_sym_mod as libc::c_int as TSSymbol,
-    anon_sym_pub as libc::c_int as TSSymbol,
-    anon_sym_return as libc::c_int as TSSymbol,
-    anon_sym_static as libc::c_int as TSSymbol,
-    anon_sym_struct as libc::c_int as TSSymbol,
-    anon_sym_trait as libc::c_int as TSSymbol,
-    anon_sym_type as libc::c_int as TSSymbol,
-    anon_sym_union as libc::c_int as TSSymbol,
-    anon_sym_unsafe as libc::c_int as TSSymbol,
-    anon_sym_use as libc::c_int as TSSymbol,
-    anon_sym_where as libc::c_int as TSSymbol,
-    anon_sym_while as libc::c_int as TSSymbol,
-    anon_sym_POUND as libc::c_int as TSSymbol,
-    anon_sym_BANG as libc::c_int as TSSymbol,
-    anon_sym_EQ as libc::c_int as TSSymbol,
-    anon_sym_COMMA as libc::c_int as TSSymbol,
-    anon_sym_extern as libc::c_int as TSSymbol,
-    anon_sym_ref as libc::c_int as TSSymbol,
-    anon_sym_DASH_GT as libc::c_int as TSSymbol,
-    anon_sym_LT as libc::c_int as TSSymbol,
-    anon_sym_GT as libc::c_int as TSSymbol,
-    anon_sym_COLON_COLON as libc::c_int as TSSymbol,
-    anon_sym__ as libc::c_int as TSSymbol,
-    anon_sym_AMP as libc::c_int as TSSymbol,
-    anon_sym_DOT_DOT_DOT as libc::c_int as TSSymbol,
-    anon_sym_in as libc::c_int as TSSymbol,
-    anon_sym_LT2 as libc::c_int as TSSymbol,
-    anon_sym_dyn as libc::c_int as TSSymbol,
-    sym_mutable_specifier as libc::c_int as TSSymbol,
-    anon_sym_DOT_DOT as libc::c_int as TSSymbol,
-    anon_sym_DOT_DOT_EQ as libc::c_int as TSSymbol,
-    anon_sym_DASH as libc::c_int as TSSymbol,
-    anon_sym_AMP_AMP as libc::c_int as TSSymbol,
-    anon_sym_PIPE_PIPE as libc::c_int as TSSymbol,
-    anon_sym_PIPE as libc::c_int as TSSymbol,
-    anon_sym_CARET as libc::c_int as TSSymbol,
-    anon_sym_EQ_EQ as libc::c_int as TSSymbol,
-    anon_sym_BANG_EQ as libc::c_int as TSSymbol,
-    anon_sym_LT_EQ as libc::c_int as TSSymbol,
-    anon_sym_GT_EQ as libc::c_int as TSSymbol,
-    anon_sym_LT_LT as libc::c_int as TSSymbol,
-    anon_sym_GT_GT as libc::c_int as TSSymbol,
-    anon_sym_SLASH as libc::c_int as TSSymbol,
-    anon_sym_PERCENT as libc::c_int as TSSymbol,
-    anon_sym_PLUS_EQ as libc::c_int as TSSymbol,
-    anon_sym_DASH_EQ as libc::c_int as TSSymbol,
-    anon_sym_STAR_EQ as libc::c_int as TSSymbol,
-    anon_sym_SLASH_EQ as libc::c_int as TSSymbol,
-    anon_sym_PERCENT_EQ as libc::c_int as TSSymbol,
-    anon_sym_AMP_EQ as libc::c_int as TSSymbol,
-    anon_sym_PIPE_EQ as libc::c_int as TSSymbol,
-    anon_sym_CARET_EQ as libc::c_int as TSSymbol,
-    anon_sym_LT_LT_EQ as libc::c_int as TSSymbol,
-    anon_sym_GT_GT_EQ as libc::c_int as TSSymbol,
-    anon_sym_else as libc::c_int as TSSymbol,
-    anon_sym_move as libc::c_int as TSSymbol,
-    anon_sym_DOT as libc::c_int as TSSymbol,
-    anon_sym_AT as libc::c_int as TSSymbol,
-    sym_integer_literal as libc::c_int as TSSymbol,
-    anon_sym_DQUOTE as libc::c_int as TSSymbol,
-    anon_sym_DQUOTE as libc::c_int as TSSymbol,
-    sym_char_literal as libc::c_int as TSSymbol,
-    sym_escape_sequence as libc::c_int as TSSymbol,
-    anon_sym_true as libc::c_int as TSSymbol,
-    anon_sym_false as libc::c_int as TSSymbol,
-    sym_line_comment as libc::c_int as TSSymbol,
-    sym_self as libc::c_int as TSSymbol,
-    sym_super as libc::c_int as TSSymbol,
-    sym_crate as libc::c_int as TSSymbol,
-    sym_metavariable as libc::c_int as TSSymbol,
-    sym__string_content as libc::c_int as TSSymbol,
-    sym_raw_string_literal as libc::c_int as TSSymbol,
-    sym_float_literal as libc::c_int as TSSymbol,
-    sym_block_comment as libc::c_int as TSSymbol,
-    sym_source_file as libc::c_int as TSSymbol,
-    sym__statement as libc::c_int as TSSymbol,
-    sym_empty_statement as libc::c_int as TSSymbol,
-    sym__expression_statement as libc::c_int as TSSymbol,
-    sym_macro_definition as libc::c_int as TSSymbol,
-    sym_macro_rule as libc::c_int as TSSymbol,
-    sym__token_pattern as libc::c_int as TSSymbol,
-    sym_token_tree_pattern as libc::c_int as TSSymbol,
-    sym_token_binding_pattern as libc::c_int as TSSymbol,
-    sym_token_repetition_pattern as libc::c_int as TSSymbol,
-    sym_fragment_specifier as libc::c_int as TSSymbol,
-    sym_token_tree as libc::c_int as TSSymbol,
-    sym_token_repetition as libc::c_int as TSSymbol,
-    sym_attribute_item as libc::c_int as TSSymbol,
-    sym_inner_attribute_item as libc::c_int as TSSymbol,
-    sym_meta_item as libc::c_int as TSSymbol,
-    sym_meta_arguments as libc::c_int as TSSymbol,
-    sym_mod_item as libc::c_int as TSSymbol,
-    sym_foreign_mod_item as libc::c_int as TSSymbol,
-    sym_declaration_list as libc::c_int as TSSymbol,
-    sym_struct_item as libc::c_int as TSSymbol,
-    sym_union_item as libc::c_int as TSSymbol,
-    sym_enum_item as libc::c_int as TSSymbol,
-    sym_enum_variant_list as libc::c_int as TSSymbol,
-    sym_enum_variant as libc::c_int as TSSymbol,
-    sym_field_declaration_list as libc::c_int as TSSymbol,
-    sym_field_declaration as libc::c_int as TSSymbol,
-    sym_ordered_field_declaration_list as libc::c_int as TSSymbol,
-    sym_extern_crate_declaration as libc::c_int as TSSymbol,
-    sym_const_item as libc::c_int as TSSymbol,
-    sym_static_item as libc::c_int as TSSymbol,
-    sym_type_item as libc::c_int as TSSymbol,
-    sym_function_item as libc::c_int as TSSymbol,
-    sym_function_signature_item as libc::c_int as TSSymbol,
-    sym_function_modifiers as libc::c_int as TSSymbol,
-    sym_where_clause as libc::c_int as TSSymbol,
-    sym_where_predicate as libc::c_int as TSSymbol,
-    sym_impl_item as libc::c_int as TSSymbol,
-    sym_trait_item as libc::c_int as TSSymbol,
-    sym_associated_type as libc::c_int as TSSymbol,
-    sym_trait_bounds as libc::c_int as TSSymbol,
-    sym_higher_ranked_trait_bound as libc::c_int as TSSymbol,
-    sym_removed_trait_bound as libc::c_int as TSSymbol,
-    sym_type_parameters as libc::c_int as TSSymbol,
-    sym_const_parameter as libc::c_int as TSSymbol,
-    sym_constrained_type_parameter as libc::c_int as TSSymbol,
-    sym_optional_type_parameter as libc::c_int as TSSymbol,
-    sym_let_declaration as libc::c_int as TSSymbol,
-    sym_use_declaration as libc::c_int as TSSymbol,
-    sym__use_clause as libc::c_int as TSSymbol,
-    sym_scoped_use_list as libc::c_int as TSSymbol,
-    sym_use_list as libc::c_int as TSSymbol,
-    sym_use_as_clause as libc::c_int as TSSymbol,
-    sym_use_wildcard as libc::c_int as TSSymbol,
-    sym_parameters as libc::c_int as TSSymbol,
-    sym_self_parameter as libc::c_int as TSSymbol,
-    sym_variadic_parameter as libc::c_int as TSSymbol,
-    sym_parameter as libc::c_int as TSSymbol,
-    sym_extern_modifier as libc::c_int as TSSymbol,
-    sym_visibility_modifier as libc::c_int as TSSymbol,
-    sym__type as libc::c_int as TSSymbol,
-    sym_bracketed_type as libc::c_int as TSSymbol,
-    sym_qualified_type as libc::c_int as TSSymbol,
-    sym_lifetime as libc::c_int as TSSymbol,
-    sym_array_type as libc::c_int as TSSymbol,
-    sym_for_lifetimes as libc::c_int as TSSymbol,
-    sym_function_type as libc::c_int as TSSymbol,
-    sym_tuple_type as libc::c_int as TSSymbol,
-    sym_unit_type as libc::c_int as TSSymbol,
-    sym_generic_function as libc::c_int as TSSymbol,
-    sym_generic_type as libc::c_int as TSSymbol,
-    sym_generic_type_with_turbofish as libc::c_int as TSSymbol,
-    sym_bounded_type as libc::c_int as TSSymbol,
-    sym_type_arguments as libc::c_int as TSSymbol,
-    sym_type_binding as libc::c_int as TSSymbol,
-    sym_reference_type as libc::c_int as TSSymbol,
-    sym_pointer_type as libc::c_int as TSSymbol,
-    sym_empty_type as libc::c_int as TSSymbol,
-    sym_abstract_type as libc::c_int as TSSymbol,
-    sym_dynamic_type as libc::c_int as TSSymbol,
-    sym__expression as libc::c_int as TSSymbol,
-    sym_macro_invocation as libc::c_int as TSSymbol,
-    sym_scoped_identifier as libc::c_int as TSSymbol,
-    sym_scoped_type_identifier as libc::c_int as TSSymbol,
-    sym_scoped_type_identifier as libc::c_int as TSSymbol,
-    sym_range_expression as libc::c_int as TSSymbol,
-    sym_unary_expression as libc::c_int as TSSymbol,
-    sym_try_expression as libc::c_int as TSSymbol,
-    sym_reference_expression as libc::c_int as TSSymbol,
-    sym_binary_expression as libc::c_int as TSSymbol,
-    sym_assignment_expression as libc::c_int as TSSymbol,
-    sym_compound_assignment_expr as libc::c_int as TSSymbol,
-    sym_type_cast_expression as libc::c_int as TSSymbol,
-    sym_return_expression as libc::c_int as TSSymbol,
-    sym_call_expression as libc::c_int as TSSymbol,
-    sym_arguments as libc::c_int as TSSymbol,
-    sym_array_expression as libc::c_int as TSSymbol,
-    sym_parenthesized_expression as libc::c_int as TSSymbol,
-    sym_tuple_expression as libc::c_int as TSSymbol,
-    sym_unit_expression as libc::c_int as TSSymbol,
-    sym_struct_expression as libc::c_int as TSSymbol,
-    sym_field_initializer_list as libc::c_int as TSSymbol,
-    sym_shorthand_field_initializer as libc::c_int as TSSymbol,
-    sym_field_initializer as libc::c_int as TSSymbol,
-    sym_base_field_initializer as libc::c_int as TSSymbol,
-    sym_if_expression as libc::c_int as TSSymbol,
-    sym_if_let_expression as libc::c_int as TSSymbol,
-    sym__else_tail as libc::c_int as TSSymbol,
-    sym_match_expression as libc::c_int as TSSymbol,
-    sym_match_block as libc::c_int as TSSymbol,
-    sym_match_arm as libc::c_int as TSSymbol,
-    sym_match_arm as libc::c_int as TSSymbol,
-    sym_match_pattern as libc::c_int as TSSymbol,
-    sym_while_expression as libc::c_int as TSSymbol,
-    sym_while_let_expression as libc::c_int as TSSymbol,
-    sym_loop_expression as libc::c_int as TSSymbol,
-    sym_for_expression as libc::c_int as TSSymbol,
-    sym_closure_expression as libc::c_int as TSSymbol,
-    sym_closure_parameters as libc::c_int as TSSymbol,
-    sym_loop_label as libc::c_int as TSSymbol,
-    sym_break_expression as libc::c_int as TSSymbol,
-    sym_continue_expression as libc::c_int as TSSymbol,
-    sym_index_expression as libc::c_int as TSSymbol,
-    sym_await_expression as libc::c_int as TSSymbol,
-    sym_field_expression as libc::c_int as TSSymbol,
-    sym_unsafe_block as libc::c_int as TSSymbol,
-    sym_async_block as libc::c_int as TSSymbol,
-    sym_block as libc::c_int as TSSymbol,
-    sym__pattern as libc::c_int as TSSymbol,
-    sym_tuple_pattern as libc::c_int as TSSymbol,
-    sym_slice_pattern as libc::c_int as TSSymbol,
-    sym_tuple_struct_pattern as libc::c_int as TSSymbol,
-    sym_struct_pattern as libc::c_int as TSSymbol,
-    sym_field_pattern as libc::c_int as TSSymbol,
-    sym_remaining_field_pattern as libc::c_int as TSSymbol,
-    sym_mut_pattern as libc::c_int as TSSymbol,
-    sym_range_pattern as libc::c_int as TSSymbol,
-    sym_ref_pattern as libc::c_int as TSSymbol,
-    sym_captured_pattern as libc::c_int as TSSymbol,
-    sym_reference_pattern as libc::c_int as TSSymbol,
-    sym__literal as libc::c_int as TSSymbol,
-    sym__literal_pattern as libc::c_int as TSSymbol,
-    sym_negative_literal as libc::c_int as TSSymbol,
-    sym_string_literal as libc::c_int as TSSymbol,
-    sym_boolean_literal as libc::c_int as TSSymbol,
-    aux_sym_source_file_repeat1 as libc::c_int as TSSymbol,
-    aux_sym_macro_definition_repeat1 as libc::c_int as TSSymbol,
-    aux_sym_token_tree_pattern_repeat1 as libc::c_int as TSSymbol,
-    aux_sym_token_tree_repeat1 as libc::c_int as TSSymbol,
-    aux_sym_meta_arguments_repeat1 as libc::c_int as TSSymbol,
-    aux_sym_declaration_list_repeat1 as libc::c_int as TSSymbol,
-    aux_sym_enum_variant_list_repeat1 as libc::c_int as TSSymbol,
-    aux_sym_enum_variant_list_repeat2 as libc::c_int as TSSymbol,
-    aux_sym_field_declaration_list_repeat1 as libc::c_int as TSSymbol,
-    aux_sym_ordered_field_declaration_list_repeat1 as libc::c_int as TSSymbol,
-    aux_sym_function_modifiers_repeat1 as libc::c_int as TSSymbol,
-    aux_sym_where_clause_repeat1 as libc::c_int as TSSymbol,
-    aux_sym_trait_bounds_repeat1 as libc::c_int as TSSymbol,
-    aux_sym_type_parameters_repeat1 as libc::c_int as TSSymbol,
-    aux_sym_use_list_repeat1 as libc::c_int as TSSymbol,
-    aux_sym_parameters_repeat1 as libc::c_int as TSSymbol,
-    aux_sym_for_lifetimes_repeat1 as libc::c_int as TSSymbol,
-    aux_sym_tuple_type_repeat1 as libc::c_int as TSSymbol,
-    aux_sym_type_arguments_repeat1 as libc::c_int as TSSymbol,
-    aux_sym_arguments_repeat1 as libc::c_int as TSSymbol,
-    aux_sym_array_expression_repeat1 as libc::c_int as TSSymbol,
-    aux_sym_tuple_expression_repeat1 as libc::c_int as TSSymbol,
-    aux_sym_field_initializer_list_repeat1 as libc::c_int as TSSymbol,
-    aux_sym_match_block_repeat1 as libc::c_int as TSSymbol,
-    aux_sym_match_pattern_repeat1 as libc::c_int as TSSymbol,
-    aux_sym_closure_parameters_repeat1 as libc::c_int as TSSymbol,
-    aux_sym_tuple_pattern_repeat1 as libc::c_int as TSSymbol,
-    aux_sym_struct_pattern_repeat1 as libc::c_int as TSSymbol,
-    aux_sym_string_literal_repeat1 as libc::c_int as TSSymbol,
-    alias_sym_field_identifier as libc::c_int as TSSymbol,
-    alias_sym_primitive_type as libc::c_int as TSSymbol,
-    alias_sym_shorthand_field_identifier as libc::c_int as TSSymbol,
-    alias_sym_type_identifier as libc::c_int as TSSymbol,
+pub const ts_symbol_map: [TSSymbol; 316] = [
+    0,
+    sym_identifier,
+    anon_sym_SEMI,
+    anon_sym_macro_rules_BANG,
+    anon_sym_LPAREN,
+    anon_sym_RPAREN,
+    anon_sym_LBRACE,
+    anon_sym_RBRACE,
+    anon_sym_EQ_GT,
+    anon_sym_LBRACK,
+    anon_sym_RBRACK,
+    anon_sym_COLON,
+    anon_sym_DOLLAR,
+    aux_sym_token_repetition_pattern_token1,
+    anon_sym_PLUS,
+    anon_sym_STAR,
+    anon_sym_QMARK,
+    anon_sym_block,
+    anon_sym_expr,
+    anon_sym_ident,
+    anon_sym_item,
+    anon_sym_lifetime,
+    anon_sym_literal,
+    anon_sym_meta,
+    anon_sym_pat,
+    anon_sym_path,
+    anon_sym_stmt,
+    anon_sym_tt,
+    anon_sym_ty,
+    anon_sym_vis,
+    anon_sym_u8,
+    anon_sym_i8,
+    anon_sym_u16,
+    anon_sym_i16,
+    anon_sym_u32,
+    anon_sym_i32,
+    anon_sym_u64,
+    anon_sym_i64,
+    anon_sym_u128,
+    anon_sym_i128,
+    anon_sym_isize,
+    anon_sym_usize,
+    anon_sym_f32,
+    anon_sym_f64,
+    anon_sym_bool,
+    anon_sym_str,
+    anon_sym_char,
+    aux_sym__non_special_token_token1,
+    anon_sym_SQUOTE,
+    anon_sym_as,
+    anon_sym_async,
+    anon_sym_await,
+    anon_sym_break,
+    anon_sym_const,
+    anon_sym_continue,
+    anon_sym_default,
+    anon_sym_enum,
+    anon_sym_fn,
+    anon_sym_for,
+    anon_sym_if,
+    anon_sym_impl,
+    anon_sym_let,
+    anon_sym_loop,
+    anon_sym_match,
+    anon_sym_mod,
+    anon_sym_pub,
+    anon_sym_return,
+    anon_sym_static,
+    anon_sym_struct,
+    anon_sym_trait,
+    anon_sym_type,
+    anon_sym_union,
+    anon_sym_unsafe,
+    anon_sym_use,
+    anon_sym_where,
+    anon_sym_while,
+    anon_sym_POUND,
+    anon_sym_BANG,
+    anon_sym_EQ,
+    anon_sym_COMMA,
+    anon_sym_extern,
+    anon_sym_ref,
+    anon_sym_DASH_GT,
+    anon_sym_LT,
+    anon_sym_GT,
+    anon_sym_COLON_COLON,
+    anon_sym__,
+    anon_sym_AMP,
+    anon_sym_DOT_DOT_DOT,
+    anon_sym_in,
+    anon_sym_LT2,
+    anon_sym_dyn,
+    sym_mutable_specifier,
+    anon_sym_DOT_DOT,
+    anon_sym_DOT_DOT_EQ,
+    anon_sym_DASH,
+    anon_sym_AMP_AMP,
+    anon_sym_PIPE_PIPE,
+    anon_sym_PIPE,
+    anon_sym_CARET,
+    anon_sym_EQ_EQ,
+    anon_sym_BANG_EQ,
+    anon_sym_LT_EQ,
+    anon_sym_GT_EQ,
+    anon_sym_LT_LT,
+    anon_sym_GT_GT,
+    anon_sym_SLASH,
+    anon_sym_PERCENT,
+    anon_sym_PLUS_EQ,
+    anon_sym_DASH_EQ,
+    anon_sym_STAR_EQ,
+    anon_sym_SLASH_EQ,
+    anon_sym_PERCENT_EQ,
+    anon_sym_AMP_EQ,
+    anon_sym_PIPE_EQ,
+    anon_sym_CARET_EQ,
+    anon_sym_LT_LT_EQ,
+    anon_sym_GT_GT_EQ,
+    anon_sym_else,
+    anon_sym_move,
+    anon_sym_DOT,
+    anon_sym_AT,
+    sym_integer_literal,
+    anon_sym_DQUOTE,
+    anon_sym_DQUOTE,
+    sym_char_literal,
+    sym_escape_sequence,
+    anon_sym_true,
+    anon_sym_false,
+    sym_line_comment,
+    sym_self,
+    sym_super,
+    sym_crate,
+    sym_metavariable,
+    sym__string_content,
+    sym_raw_string_literal,
+    sym_float_literal,
+    sym_block_comment,
+    sym_source_file,
+    sym__statement,
+    sym_empty_statement,
+    sym__expression_statement,
+    sym_macro_definition,
+    sym_macro_rule,
+    sym__token_pattern,
+    sym_token_tree_pattern,
+    sym_token_binding_pattern,
+    sym_token_repetition_pattern,
+    sym_fragment_specifier,
+    sym_token_tree,
+    sym_token_repetition,
+    sym_attribute_item,
+    sym_inner_attribute_item,
+    sym_meta_item,
+    sym_meta_arguments,
+    sym_mod_item,
+    sym_foreign_mod_item,
+    sym_declaration_list,
+    sym_struct_item,
+    sym_union_item,
+    sym_enum_item,
+    sym_enum_variant_list,
+    sym_enum_variant,
+    sym_field_declaration_list,
+    sym_field_declaration,
+    sym_ordered_field_declaration_list,
+    sym_extern_crate_declaration,
+    sym_const_item,
+    sym_static_item,
+    sym_type_item,
+    sym_function_item,
+    sym_function_signature_item,
+    sym_function_modifiers,
+    sym_where_clause,
+    sym_where_predicate,
+    sym_impl_item,
+    sym_trait_item,
+    sym_associated_type,
+    sym_trait_bounds,
+    sym_higher_ranked_trait_bound,
+    sym_removed_trait_bound,
+    sym_type_parameters,
+    sym_const_parameter,
+    sym_constrained_type_parameter,
+    sym_optional_type_parameter,
+    sym_let_declaration,
+    sym_use_declaration,
+    sym__use_clause,
+    sym_scoped_use_list,
+    sym_use_list,
+    sym_use_as_clause,
+    sym_use_wildcard,
+    sym_parameters,
+    sym_self_parameter,
+    sym_variadic_parameter,
+    sym_parameter,
+    sym_extern_modifier,
+    sym_visibility_modifier,
+    sym__type,
+    sym_bracketed_type,
+    sym_qualified_type,
+    sym_lifetime,
+    sym_array_type,
+    sym_for_lifetimes,
+    sym_function_type,
+    sym_tuple_type,
+    sym_unit_type,
+    sym_generic_function,
+    sym_generic_type,
+    sym_generic_type_with_turbofish,
+    sym_bounded_type,
+    sym_type_arguments,
+    sym_type_binding,
+    sym_reference_type,
+    sym_pointer_type,
+    sym_empty_type,
+    sym_abstract_type,
+    sym_dynamic_type,
+    sym__expression,
+    sym_macro_invocation,
+    sym_scoped_identifier,
+    sym_scoped_type_identifier,
+    sym_scoped_type_identifier,
+    sym_range_expression,
+    sym_unary_expression,
+    sym_try_expression,
+    sym_reference_expression,
+    sym_binary_expression,
+    sym_assignment_expression,
+    sym_compound_assignment_expr,
+    sym_type_cast_expression,
+    sym_return_expression,
+    sym_call_expression,
+    sym_arguments,
+    sym_array_expression,
+    sym_parenthesized_expression,
+    sym_tuple_expression,
+    sym_unit_expression,
+    sym_struct_expression,
+    sym_field_initializer_list,
+    sym_shorthand_field_initializer,
+    sym_field_initializer,
+    sym_base_field_initializer,
+    sym_if_expression,
+    sym_if_let_expression,
+    sym__else_tail,
+    sym_match_expression,
+    sym_match_block,
+    sym_match_arm,
+    sym_match_arm,
+    sym_match_pattern,
+    sym_while_expression,
+    sym_while_let_expression,
+    sym_loop_expression,
+    sym_for_expression,
+    sym_closure_expression,
+    sym_closure_parameters,
+    sym_loop_label,
+    sym_break_expression,
+    sym_continue_expression,
+    sym_index_expression,
+    sym_await_expression,
+    sym_field_expression,
+    sym_unsafe_block,
+    sym_async_block,
+    sym_block,
+    sym__pattern,
+    sym_tuple_pattern,
+    sym_slice_pattern,
+    sym_tuple_struct_pattern,
+    sym_struct_pattern,
+    sym_field_pattern,
+    sym_remaining_field_pattern,
+    sym_mut_pattern,
+    sym_range_pattern,
+    sym_ref_pattern,
+    sym_captured_pattern,
+    sym_reference_pattern,
+    sym__literal,
+    sym__literal_pattern,
+    sym_negative_literal,
+    sym_string_literal,
+    sym_boolean_literal,
+    aux_sym_source_file_repeat1,
+    aux_sym_macro_definition_repeat1,
+    aux_sym_token_tree_pattern_repeat1,
+    aux_sym_token_tree_repeat1,
+    aux_sym_meta_arguments_repeat1,
+    aux_sym_declaration_list_repeat1,
+    aux_sym_enum_variant_list_repeat1,
+    aux_sym_enum_variant_list_repeat2,
+    aux_sym_field_declaration_list_repeat1,
+    aux_sym_ordered_field_declaration_list_repeat1,
+    aux_sym_function_modifiers_repeat1,
+    aux_sym_where_clause_repeat1,
+    aux_sym_trait_bounds_repeat1,
+    aux_sym_type_parameters_repeat1,
+    aux_sym_use_list_repeat1,
+    aux_sym_parameters_repeat1,
+    aux_sym_for_lifetimes_repeat1,
+    aux_sym_tuple_type_repeat1,
+    aux_sym_type_arguments_repeat1,
+    aux_sym_arguments_repeat1,
+    aux_sym_array_expression_repeat1,
+    aux_sym_tuple_expression_repeat1,
+    aux_sym_field_initializer_list_repeat1,
+    aux_sym_match_block_repeat1,
+    aux_sym_match_pattern_repeat1,
+    aux_sym_closure_parameters_repeat1,
+    aux_sym_tuple_pattern_repeat1,
+    aux_sym_struct_pattern_repeat1,
+    aux_sym_string_literal_repeat1,
+    alias_sym_field_identifier,
+    alias_sym_primitive_type,
+    alias_sym_shorthand_field_identifier,
+    alias_sym_type_identifier,
 ];
-//
+
 // Initialized in run_static_initializers
 static mut ts_symbol_metadata: [TSSymbolMetadata; 316] = [TSSymbolMetadata {
-    visible_named: [0; 1],
+    visible: false,
+    named: false,
 }; 316];
 
-static mut ts_field_names: [*const libc::c_char; 29] = [
-    0 as *const libc::c_char,
-    b"alias\x00" as *const u8 as *const libc::c_char,
-    b"alternative\x00" as *const u8 as *const libc::c_char,
-    b"argument\x00" as *const u8 as *const libc::c_char,
-    b"arguments\x00" as *const u8 as *const libc::c_char,
-    b"body\x00" as *const u8 as *const libc::c_char,
-    b"bounds\x00" as *const u8 as *const libc::c_char,
-    b"condition\x00" as *const u8 as *const libc::c_char,
-    b"consequence\x00" as *const u8 as *const libc::c_char,
-    b"default_type\x00" as *const u8 as *const libc::c_char,
-    b"element\x00" as *const u8 as *const libc::c_char,
-    b"field\x00" as *const u8 as *const libc::c_char,
-    b"function\x00" as *const u8 as *const libc::c_char,
-    b"left\x00" as *const u8 as *const libc::c_char,
-    b"length\x00" as *const u8 as *const libc::c_char,
-    b"list\x00" as *const u8 as *const libc::c_char,
-    b"macro\x00" as *const u8 as *const libc::c_char,
-    b"name\x00" as *const u8 as *const libc::c_char,
-    b"operator\x00" as *const u8 as *const libc::c_char,
-    b"parameters\x00" as *const u8 as *const libc::c_char,
-    b"path\x00" as *const u8 as *const libc::c_char,
-    b"pattern\x00" as *const u8 as *const libc::c_char,
-    b"return_type\x00" as *const u8 as *const libc::c_char,
-    b"right\x00" as *const u8 as *const libc::c_char,
-    b"trait\x00" as *const u8 as *const libc::c_char,
-    b"type\x00" as *const u8 as *const libc::c_char,
-    b"type_arguments\x00" as *const u8 as *const libc::c_char,
-    b"type_parameters\x00" as *const u8 as *const libc::c_char,
-    b"value\x00" as *const u8 as *const libc::c_char,
+pub const ts_field_names: [&'static [u8]; 29] = [
+    b"",
+    b"alias\x00",
+    b"alternative\x00",
+    b"argument\x00",
+    b"arguments\x00",
+    b"body\x00",
+    b"bounds\x00",
+    b"condition\x00",
+    b"consequence\x00",
+    b"default_type\x00",
+    b"element\x00",
+    b"field\x00",
+    b"function\x00",
+    b"left\x00",
+    b"length\x00",
+    b"list\x00",
+    b"macro\x00",
+    b"name\x00",
+    b"operator\x00",
+    b"parameters\x00",
+    b"path\x00",
+    b"pattern\x00",
+    b"return_type\x00",
+    b"right\x00",
+    b"trait\x00",
+    b"type\x00",
+    b"type_arguments\x00",
+    b"type_parameters\x00",
+    b"value\x00",
 ];
