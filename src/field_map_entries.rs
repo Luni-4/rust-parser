@@ -1,7 +1,7 @@
 use crate::definition::*;
 use crate::parser_api::*;
 
-static mut ts_field_map_entries: [TSFieldMapEntry; 453] = [
+pub(crate) const ts_field_map_entries: [TSFieldMapEntry; 453] = [
     {
         TSFieldMapEntry {
             field_id: field_body,

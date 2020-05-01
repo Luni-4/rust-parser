@@ -12,6 +12,7 @@ use std::ffi;
 
 use crate::definition::*;
 use crate::field_map_entries::*;
+use crate::field_map_slices::*;
 use crate::parser_api::*;
 use crate::scanner::*;
 
