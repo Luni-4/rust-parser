@@ -11,15 +11,16 @@
 use std::ffi;
 
 use crate::definition::*;
+use crate::field_map_entries::*;
 use crate::parser_api::*;
 use crate::scanner::*;
 
-/*pub const ts_external_scanner_symbol_map: [TSSymbol; 4] = [
+pub const ts_external_scanner_symbol_map: [TSSymbol; 4] = [
     sym__string_content,
     sym_raw_string_literal,
     sym_float_literal,
     sym_block_comment,
-];*/
+];
 
 pub const ts_external_scanner_states: [[bool; 4]; 6] = [
     [false; 4],
